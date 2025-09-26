@@ -25,7 +25,16 @@
                         <p><i class="fas fa-envelope"></i> <a href="mailto:ruben.quispe@example.com">ruben.quispe@example.com</a></p>
                         <p><i class="fas fa-phone"></i> <a href="tel:+51999999999">+51 999 999 999</a></p>
                         <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank">LinkedIn Profile</a></p>
-                        <p><i class="fab fa-github"></i> <a href="#" target="_blank">GitHub Profile</a></p>
+                        <p><i class="fab fa-github"></i> <a href="#" target="_blank" data-tooltip="GitHub Profile">GitHub</a></p>
+                        <p><i class="fab fa-twitter"></i> <a href="#" target="_blank" data-tooltip="Twitter Profile">Twitter</a></p>
+                    </div>
+                    <div class="acciones-inicio">
+                        <button id="downloadCv" class="btn-cv">
+                            <i class="fas fa-download"></i> Descargar CV
+                        </button>
+                        <button class="btn-contacto" onclick="compartirEnRedSocial('linkedin')">
+                            <i class="fab fa-linkedin"></i> Conecta conmigo
+                        </button>
                     </div>
                 </div>
             </div>
@@ -56,22 +65,22 @@
                 <div class="estadisticas">
                     <div class="stat">
                         <i class="fas fa-users"></i>
-                        <h3>500+</h3>
+                        <h3 data-target="500">0+</h3>
                         <p>Conexiones</p>
                     </div>
                     <div class="stat">
                         <i class="fas fa-eye"></i>
-                        <h3>1K</h3>
+                        <h3 data-target="1000">0</h3>
                         <p>Seguidores</p>
                     </div>
                     <div class="stat">
                         <i class="fas fa-briefcase"></i>
-                        <h3>5+</h3>
+                        <h3 data-target="5">0</h3>
                         <p>Años de Experiencia</p>
                     </div>
                     <div class="stat">
                         <i class="fas fa-graduation-cap"></i>
-                        <h3>10</h3>
+                        <h3 data-target="10">0</h3>
                         <p>Certificaciones</p>
                     </div>
                 </div>
@@ -175,28 +184,28 @@
                     <div class="categoria">
                         <h3>Habilidades Técnicas</h3>
                         <div class="habilidad-progreso">
-                            <p>Desarrollo Web</p>
+                            <p>Desarrollo Web <span>80%</span></p>
                             <div class="barra-progreso">
                                 <div class="relleno" style="width: 80%"></div>
                             </div>
                         </div>
                         
                         <div class="habilidad-progreso">
-                            <p>Machine Learning</p>
+                            <p>Machine Learning <span>70%</span></p>
                             <div class="barra-progreso">
                                 <div class="relleno" style="width: 70%"></div>
                             </div>
                         </div>
                         
                         <div class="habilidad-progreso">
-                            <p>Análisis de Datos</p>
+                            <p>Análisis de Datos <span>85%</span></p>
                             <div class="barra-progreso">
                                 <div class="relleno" style="width: 85%"></div>
                             </div>
                         </div>
                         
                         <div class="habilidad-progreso">
-                            <p>Bases de Datos</p>
+                            <p>Bases de Datos <span>75%</span></p>
                             <div class="barra-progreso">
                                 <div class="relleno" style="width: 75%"></div>
                             </div>
@@ -349,14 +358,82 @@
         </div>
     </section>
 
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-envelope"></i> Contacto</h2>
+            <div class="contenido-seccion">
+                <div class="contacto-content">
+                    <div class="contacto-info">
+                        <h3>¡Contáctame!</h3>
+                        <p>Si estás interesado en trabajar conmigo o tienes alguna pregunta, no dudes en ponerte en contacto. Estoy siempre abierto a nuevas oportunidades y colaboraciones.</p>
+                        
+                        <div class="contacto-detalles">
+                            <div class="detalle">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>ruben.quispe@example.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detalle">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Teléfono</h4>
+                                    <p>+51 999 999 999</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detalle">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Ubicación</h4>
+                                    <p>Lima, Perú</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form id="contactForm" class="contacto-form">
+                        <div class="form-group">
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Tu Email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="asunto" name="asunto" placeholder="Asunto" required>
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        
+                        <div class="form-group-full">
+                            <textarea id="mensaje" name="mensaje" placeholder="Tu Mensaje" rows="5" required></textarea>
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pie de página -->
     <footer class="pie-pagina">
         <div class="container">
             <p>&copy; 2025 Rubén D. Quispe. Todos los derechos reservados.</p>
             <div class="redes-sociales">
-                <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank"><i class="fab fa-linkedin"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank" data-tooltip="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
         </div>
     </footer>
