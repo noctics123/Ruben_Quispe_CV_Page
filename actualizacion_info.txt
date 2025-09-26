@@ -1,0 +1,67 @@
+Puedes actualizar la siguiente información en tu CV página:
+
+INFORMACIÓN PERSONAL:
+- Nombre completo: Rubén D. Quispe
+- Título profesional: Systems Engineer | Data Analytics Specialist
+- Ubicación: Lima, Perú
+- Email: [Tu email actual]
+- Teléfono: [Tu número de teléfono]
+
+EXPERIENCIA PROFESIONAL:
+1. Systems Engineer en NTT DATA Europe & Latam
+   - Fecha de inicio: [Fecha]
+   - Descripción: Desarrollando soluciones tecnológicas y análisis de datos para clientes corporativos
+
+2. [Otro puesto de tu LinkedIn]
+   - Empresa: [Nombre de la empresa]
+   - Fechas: [Fecha inicio - Fecha fin]
+   - Descripción: [Tus responsabilidades y logros]
+
+EDUCACIÓN:
+1. UTP Universidad Tecnológica del Perú
+   - Período: 2019 - 2024
+   - Título: [Tu título académico]
+
+2. [Otra institución]
+   - Período: [Fecha]
+   - Título: [Tu título académico]
+
+HABILIDADES:
+- Python
+- JavaScript
+- SQL
+- Machine Learning
+- Análisis de Datos
+- Bases de Datos
+- Desarrollo Web
+- Business Analytics
+- Data Reporting
+- IT Consulting
+- Data Recovery
+- Application Development
+
+PROYECTOS DESTACADOS:
+1. [Nombre de tu proyecto más destacado]
+   - Descripción: [Breve descripción del proyecto]
+   - Tecnologías: [Tecnologías utilizadas]
+
+2. Desarrollo del Sitio Web IEEE Computer Society UTP
+   - Descripción: Desarrollo y mantenimiento del sitio web oficial para el capítulo estudiantil IEEE Computer Society en la UTP
+   - Tecnologías: HTML/CSS, JavaScript, UI/UX
+
+3. Proyecto de Realidad Aumentada
+   - Descripción: Participación en un proyecto de creación de realidad aumentada para aplicación educativa
+   - Tecnologías: AR, Desarrollo 3D, Prototipado
+
+CERTIFICACIONES (ya incluidas en el CV):
+- Certificado Excel Intermedio - Corporación Grupo Romero
+- Desarrollo de Apps Móviles - Google
+- Google Cloud Big Data and Machine Learning Fundamentals - Google
+- [Y todas las demás que ya tienes listadas]
+
+PERFIL SOCIAL:
+- GitHub: https://github.com/noctics123
+- LinkedIn: https://www.linkedin.com/in/rubenquispev/
+- [Otras redes sociales si aplican]
+
+Para actualizar tu CV página con esta información, puedes reemplazar los marcadores de posición en los archivos HTML, CSS y JavaScript.

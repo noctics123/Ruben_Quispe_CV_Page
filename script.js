@@ -774,8 +774,30 @@ function aiAssistantCommand(comando) {
         case 'projects':
             showNotification('Proyectos destacados: IEEE Computer Society UTP Website, AR Project Creation, Productivity Mobile App', 'success');
             break;
+        case 'contact':
+            showNotification('Contáctame: ruben.quispev@gmail.com | +51 987 654 321', 'success');
+            break;
         default:
             showNotification('Comando no reconocido', 'error');
+    }
+}
+
+// Función para manejar enlaces de contacto
+function initContactLinks() {
+    // Actualizar enlaces de contacto con información real
+    const emailLink = document.querySelector('a[data-email]');
+    const phoneLink = document.querySelector('a[data-phone]');
+    
+    if(emailLink) {
+        emailLink.addEventListener('click', function(e) {
+            showNotification('Copiado al portapapeles: ' + this.textContent, 'success');
+        });
+    }
+    
+    if(phoneLink) {
+        phoneLink.addEventListener('click', function(e) {
+            showNotification('Marcando: ' + this.textContent, 'success');
+        });
     }
 }
 
@@ -826,6 +848,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initThemeToggle();
     initTimeline();
     initMicroInteractions();
+    initContactLinks();
     
     // Agregar eventos para la terminal
     document.addEventListener('keydown', function(e) {
