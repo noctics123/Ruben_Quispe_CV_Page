@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rubén D. Quispe - CV Profesional</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Contenedor de código animado -->
+    <div class="codigo-animado" id="codigoAnimado"></div>
+    
+    <!-- Efectos de flujo de datos -->
+    <div class="data-flow" id="dataFlow"></div>
+    
+    <!-- Efectos de IA y Data Science -->
+    <div class="ia-data-container" id="iaDataContainer">
+        <div class="grafico-animado"><i class="fas fa-project-diagram"></i></div>
+        <div class="grafico-animado"><i class="fas fa-chart-line"></i></div>
+        <div class="grafico-animado"><i class="fas fa-brain"></i></div>
+        <div class="grafico-animado"><i class="fas fa-database"></i></div>
+        <div class="grafico-animado"><i class="fas fa-robot"></i></div>
+    </div>
+    
+    <!-- Terminal animada -->
+    <div class="terminal" id="terminal">
+        <div class="terminal-header">
+            <div class="terminal-title">IA Terminal</div>
+            <div class="terminal-controls">
+                <div class="terminal-control close"></div>
+                <div class="terminal-control minimize"></div>
+                <div class="terminal-control maximize"></div>
+            </div>
+        </div>
+        <div class="terminal-content" id="terminalContent">
+            <!-- Contenido dinámico de la terminal -->
+        </div>
+    </div>
+    
+    <!-- Asistente de IA -->
+    <div class="ai-assistant" id="aiAssistant">
+        <i class="fas fa-robot"></i>
+        <div class="ai-assistant-content" id="aiAssistantContent">
+            <p>¡Hola! Soy tu asistente de IA. Puedo ayudarte a navegar por mi CV o responder preguntas sobre mi experiencia.</p>
+            <button onclick="aiAssistantCommand('skills')" class="badge">Ver Habilidades</button>
+            <button onclick="aiAssistantCommand('projects')" class="badge">Ver Proyectos</button>
+        </div>
+    </div>
+    
+    <!-- Control de tema -->
+    <div class="theme-toggle" id="themeToggle"></div>
+
+    <!-- Header/Inicio -->
+    <header id="inicio" class="header">
+        <div class="container">
+            <div class="perfil">
+                <div class="foto-perfil">
+                    <img src="./ruben foto.jpeg" alt="Rubén Quispe" onerror="this.src='https://via.placeholder.com/200x200/4a86e8/ffffff?text=RQ'; this.onerror=null;">
+                </div>
+                <div class="info-perfil">
+                    <h1>Rubén D. Quispe</h1>
+                    <h2>Systems Engineer | Data Analytics Specialist</h2>
+                    <p class="descripcion">Turning Data into Actionable Insights 📊</p>
+                    <div class="contacto">
+                        <p><i class="fas fa-map-marker-alt"></i> Lima, Perú</p>
+                        <p><i class="fas fa-envelope"></i> <a href="mailto:ruben.quispev@gmail.com" data-email>ruben.quispev@gmail.com</a></p>
+                        <p><i class="fas fa-phone"></i> <a href="tel:+51987654321" data-phone>+51 987 654 321</a></p>
+                        <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank" data-tooltip="LinkedIn Profile">LinkedIn</a></p>
+                        <p><i class="fab fa-github"></i> <a href="https://github.com/noctics123" target="_blank" data-tooltip="GitHub Profile">GitHub</a></p>
+                        <p><i class="fab fa-twitter"></i> <a href="https://twitter.com/rubenquispev" target="_blank" data-tooltip="Twitter Profile">Twitter</a></p>
+                    </div>
+                    <div class="acciones-inicio">
+                        <button id="downloadCv" class="btn-cv">
+                            <i class="fas fa-download"></i> Descargar CV
+                        </button>
+                        <button class="btn-contacto" onclick="compartirEnRedSocial('linkedin')">
+                            <i class="fab fa-linkedin"></i> Conecta conmigo
+                        </button>
+                        <button class="btn-terminal" onclick="toggleTerminal()">
+                            <i class="fas fa-terminal"></i> IA Terminal
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Navegación -->
+        <nav class="navegacion">
+            <ul>
+                <li><a href="#inicio"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#sobre-mi"><i class="fas fa-user"></i> Sobre Mí</a></li>
+                <li><a href="#experiencia"><i class="fas fa-briefcase"></i> Experiencia</a></li>
+                <li><a href="#educacion"><i class="fas fa-graduation-cap"></i> Educación</a></li>
+                <li><a href="#habilidades"><i class="fas fa-cogs"></i> Habilidades</a></li>
+                <li><a href="#certificaciones"><i class="fas fa-certificate"></i> Certificaciones</a></li>
+                <li><a href="#voluntariado"><i class="fas fa-handshake"></i> Voluntariado</a></li>
+                <li><a href="#proyectos"><i class="fas fa-project-diagram"></i> Proyectos</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección Sobre Mí -->
+    <section id="sobre-mi" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-user"></i> Sobre Mí</h2>
+            <div class="contenido-seccion">
+                <p>¡Hola! Soy Rubén Quispe, un Ingeniero de Sistemas especializado en análisis de datos y en convertir datos en insights accionables. Apasionado por la tecnología, la ciencia de datos, el machine learning y todo lo relacionado con el mundo digital. Con experiencia en desarrollo de aplicaciones, análisis de negocios y consultoría tecnológica.</p>
+                
+                <div class="estadisticas">
+                    <div class="stat">
+                        <i class="fas fa-users"></i>
+                        <h3 data-target="1000">0+</h3>
+                        <p>Conexiones</p>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-eye"></i>
+                        <h3 data-target="1000">0</h3>
+                        <p>Seguidores</p>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-briefcase"></i>
+                        <h3 data-target="4">0+</h3>
+                        <p>Años de Experiencia</p>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h3 data-target="10">0</h3>
+                        <p>Certificaciones</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Experiencia -->
+    <section id="experiencia" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-briefcase"></i> Experiencia Profesional</h2>
+            <div class="contenido-seccion">
+                <!-- Esta sección contendrá la experiencia con base en LinkedIn -->
+                <div class="experiencia-item">
+                    <div class="empresa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/NTT_Data_logo.svg/1200px-NTT_Data_logo.svg.png" alt="NTT DATA" onerror="this.src='https://via.placeholder.com/100x40/4a86e8/ffffff?text=NTT'; this.onerror=null;">
+                    </div>
+                    <div class="detalle-experiencia">
+                        <h3>Systems Engineer</h3>
+                        <h4>NTT DATA Europe & Latam</h4>
+                        <p class="fecha"><i class="far fa-calendar"></i> Fecha de inicio - Presente</p>
+                        <p>Desarrollando soluciones tecnológicas y análisis de datos para clientes corporativos.</p>
+                        <div class="tecnologias">
+                            <span class="tecnologia">Python</span>
+                            <span class="tecnologia">SQL</span>
+                            <span class="tecnologia">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experiencia-item">
+                    <div class="empresa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/IEEE_logo.svg/1200px-IEEE_logo.svg.png" alt="IEEE UTP Perú" onerror="this.src='https://via.placeholder.com/100x40/6aa84f/ffffff?text=IEEE'; this.onerror=null;" style="filter: invert(1);">
+                    </div>
+                    <div class="detalle-experiencia">
+                        <h3>Web Master Team Member</h3>
+                        <h4>IEEE UTP Perú</h4>
+                        <p class="fecha"><i class="far fa-calendar"></i> Mar 2021 - Presente</p>
+                        <p>Miembro del equipo de web master de IEEE UTP.</p>
+                        <div class="tecnologias">
+                            <span class="tecnologia">Web Development</span>
+                            <span class="tecnologia">Team Collaboration</span>
+                            <span class="tecnologia">HTML/CSS</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="experiencia-item">
+                    <div class="empresa">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Logo_of_UTP_Peru.png/800px-Logo_of_UTP_Peru.png" alt="UTP Universidad Tecnológica del Perú" onerror="this.src='https://via.placeholder.com/100x40/8e7cc3/ffffff?text=UTP'; this.onerror=null;">
+                    </div>
+                    <div class="detalle-experiencia">
+                        <h3>Orientador Académico</h3>
+                        <h4>UTP Universidad Tecnológica del Perú</h4>
+                        <p class="fecha"><i class="far fa-calendar"></i> Ago 2022 - Dic 2022</p>
+                        <p>Parte del programa Buddy de la oficina internacional de la Universidad Tecnológica del Perú. A cargo de guiar a estudiantes extranjeros de Brasil, México, Argentina, Colombia, Panamá y Paraguay en sus clases en la Universidad Tecnológica del Perú. Elaboración de dinámicas, soft skills.</p>
+                        <div class="tecnologias">
+                            <span class="tecnologia">Liderazgo</span>
+                            <span class="tecnologia">Soft Skills</span>
+                            <span class="tecnologia">Interculturalidad</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Educación -->
+    <section id="educacion" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-graduation-cap"></i> Educación</h2>
+            <div class="contenido-seccion">
+                <div class="educacion-item">
+                    <div class="institucion">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/UTP_logo.png/800px-UTP_logo.png" alt="UTP Universidad Tecnológica del Perú" onerror="this.src='https://via.placeholder.com/100x40/8e7cc3/ffffff?text=UTP'; this.onerror=null;">
+                    </div>
+                    <div class="detalle-educacion">
+                        <h3>Ingeniería de Sistemas</h3>
+                        <h4>UTP Universidad Tecnológica del Perú</h4>
+                        <p class="fecha"><i class="far fa-calendar"></i> 2019 - 2024</p>
+                        <p>Formación especializada en sistemas de información, inteligencia artificial y análisis de datos.</p>
+                    </div>
+                </div>
+                
+                <div class="educacion-item">
+                    <div class="institucion">
+                        <img src="https://via.placeholder.com/100x40/351c75/ffffff?text=SEC" alt="Educación Secundaria">
+                    </div>
+                    <div class="detalle-educacion">
+                        <h3>Educación Secundaria Completa</h3>
+                        <h4>[Nombre del colegio]</h4>
+                        <p class="fecha"><i class="far fa-calendar"></i> 2015 - 2019</p>
+                        <p>Formación general con énfasis en ciencias y tecnología.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Habilidades -->
+    <section id="habilidades" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-cogs"></i> Habilidades & Servicios</h2>
+            <div class="contenido-seccion">
+                <div class="categorias-habilidades">
+                    <div class="categoria">
+                        <h3>Tecnologías</h3>
+                        <div class="habilidades-badges">
+                            <span class="badge">Data Recovery</span>
+                            <span class="badge">Database Development</span>
+                            <span class="badge">Application Development</span>
+                            <span class="badge">Business Analytics</span>
+                            <span class="badge">Data Reporting</span>
+                            <span class="badge">IT Consulting</span>
+                        </div>
+                    </div>
+                    
+                    <div class="categoria">
+                        <h3>Habilidades Técnicas</h3>
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 490;"
+                                        stroke-dasharray="490 490"
+                                        stroke-dashoffset="122.5"></circle>
+                                </svg>
+                                <div class="texto">80%</div>
+                            </div>
+                            <div class="grafico-label">Desarrollo Web</div>
+                        </div>
+                        
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 418;"
+                                        stroke-dasharray="418 490"
+                                        stroke-dashoffset="145.5"></circle>
+                                </svg>
+                                <div class="texto">70%</div>
+                            </div>
+                            <div class="grafico-label">Machine Learning</div>
+                        </div>
+                        
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 490;"
+                                        stroke-dasharray="416.5 490"
+                                        stroke-dashoffset="73.5"></circle>
+                                </svg>
+                                <div class="texto">85%</div>
+                            </div>
+                                <div class="grafico-label">Análisis de Datos</div>
+                        </div>
+                        
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 490;"
+                                        stroke-dasharray="367.5 490"
+                                        stroke-dashoffset="122.5"></circle>
+                                </svg>
+                                <div class="texto">75%</div>
+                            </div>
+                            <div class="grafico-label">Bases de Datos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg style="display: none;">
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00dbde" />
+                    <stop offset="100%" stop-color="#fc00ff" />
+                </linearGradient>
+            </defs>
+        </svg>
+    </section>
+
+    <!-- Sección Certificaciones -->
+    <section id="certificaciones" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-certificate"></i> Certificaciones</h2>
+            <div class="contenido-seccion">
+                <div class="certificacion-item">
+                    <h3>Certificado Excel Intermedio</h3>
+                    <h4>Corporación Grupo Romero</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2022</p>
+                    <p>Competencia en el manejo avanzado de funciones y fórmulas en Excel.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Excel</span>
+                        <span class="tecnologia">Análisis de Datos</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Desarrollo de Apps Móviles</h3>
+                    <h4>Google</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2022</p>
+                    <p>Desarrollo de aplicaciones móviles con tecnologías modernas.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Android</span>
+                        <span class="tecnologia">Mobile Dev</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Google Cloud Big Data and Machine Learning Fundamentals</h3>
+                    <h4>Google</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2022</p>
+                    <p>Conceptos fundamentales de Big Data y Machine Learning en Google Cloud Platform.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">GCP</span>
+                        <span class="tecnologia">Big Data</span>
+                        <span class="tecnologia">ML</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Introducción a Big Data</h3>
+                    <h4>Fundación Telefónica</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2022</p>
+                    <p>Conceptos básicos y aplicaciones del Big Data en la actualidad.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Big Data</span>
+                        <span class="tecnologia">Data Science</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>SQL for Data Analysis and Data Science</h3>
+                    <h4>Udemy</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2022</p>
+                    <p>Uso de SQL para análisis y ciencia de datos.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">SQL</span>
+                        <span class="tecnologia">Data Analysis</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Cybersecurity Roles, Processes & Operating System Security</h3>
+                    <h4>IBM</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2021</p>
+                    <p>Roles, procesos y seguridad de sistemas operativos.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Cybersecurity</span>
+                        <span class="tecnologia">IBM</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Software Security</h3>
+                    <h4>University of Maryland</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2021</p>
+                    <p>Principios y prácticas de seguridad en desarrollo de software.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Software Security</span>
+                        <span class="tecnologia">UMD</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Diseño Web con HTML5 + CSS</h3>
+                    <h4>Fundación Telefónica</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Sep 2020</p>
+                    <p>Desarrollo de sitios web modernos con HTML5 y CSS.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">HTML5</span>
+                        <span class="tecnologia">CSS</span>
+                        <span class="tecnologia">Web Design</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Lifelong Learning</h3>
+                    <h4>Certiprof</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Aug 2020</p>
+                    <p>Compromiso con el aprendizaje continuo y mejora profesional.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Lifelong Learning</span>
+                        <span class="tecnologia">Soft Skills</span>
+                    </div>
+                </div>
+                
+                <div class="certificacion-item">
+                    <h3>Scrum Foundation Professional Certificate (SFPC)</h3>
+                    <h4>Certiprof</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Jun 2020</p>
+                    <p>Certificación en fundamentos de la metodología Scrum.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Scrum</span>
+                        <span class="tecnologia">Agile</span>
+                        <span class="tecnologia">Project Management</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Voluntariado -->
+    <section id="voluntariado" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-handshake"></i> Experiencia de Voluntariado</h2>
+            <div class="contenido-seccion">
+                <div class="voluntariado-item">
+                    <h3>Desarrollador Web</h3>
+                    <h4>IEEE Computer Society UTP</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Mar 2022 - Presente</p>
+                    <p>Desarrollo del sitio web de IEEE Computer Society UTP. Parte del proyecto de creación de realidad aumentada.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Web Development</span>
+                        <span class="tecnologia">AR Project</span>
+                        <span class="tecnologia">Teamwork</span>
+                    </div>
+                </div>
+                
+                <div class="voluntariado-item">
+                    <h3>Personal Voluntario</h3>
+                    <h4>CREA+ Perú</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> May 2022 - Jul 2022</p>
+                    <p>A cargo de enseñar a los niños cómo usar la tecnología y motivarlos a ingresar a este mundo de la ciencia y la tecnología.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Educación</span>
+                        <span class="tecnologia">Tutoría</span>
+                        <span class="tecnologia">STEM</span>
+                    </div>
+                </div>
+                
+                <div class="voluntariado-item">
+                    <h3>Estudiante Voluntario</h3>
+                    <h4>IEEE UTP Perú</h4>
+                    <p class="fecha"><i class="far fa-calendar"></i> Mar 2021 - Presente</p>
+                    <p>Miembro del equipo de web master de IEEE UTP.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Web Master</span>
+                        <span class="tecnologia">IEEE</span>
+                        <span class="tecnologia">Desarrollo Web</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Proyectos -->
+    <section id="proyectos" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-project-diagram"></i> Proyectos Destacados</h2>
+            <div class="contenido-seccion">
+                <div class="proyecto-item">
+                    <h3>Desarrollo del Sitio Web IEEE Computer Society UTP</h3>
+                    <p>Desarrollo y mantenimiento del sitio web oficial para el capítulo estudiantil IEEE Computer Society en la UTP. Implementación de funcionalidades interactivas y optimización de rendimiento.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">HTML/CSS</span>
+                        <span class="tecnologia">JavaScript</span>
+                        <span class="tecnologia">UI/UX</span>
+                    </div>
+                    <div class="proyecto-links">
+                        <a href="https://github.com/noctics123/IEEE-Computer-Society-UTP" target="_blank"><i class="fab fa-github"></i> Ver Código</a>
+                    </div>
+                </div>
+                
+                <div class="proyecto-item">
+                    <h3>Proyecto de Realidad Aumentada</h3>
+                    <p>Participación en un proyecto de creación de realidad aumentada para aplicación educativa. Desarrollo de prototipos y pruebas de concepto.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">AR</span>
+                        <span class="tecnologia">Desarrollo 3D</span>
+                        <span class="tecnologia">Prototipado</span>
+                    </div>
+                    <div class="proyecto-links">
+                        <a href="https://github.com/noctics123/AR-Educational-Project" target="_blank"><i class="fab fa-github"></i> Ver Código</a>
+                    </div>
+                </div>
+                
+                <div class="proyecto-item">
+                    <h3>Aplicación Móvil de Productividad</h3>
+                    <p>Desarrollo de una aplicación móvil para mejorar la productividad personal y profesional. Implementación de funcionalidades como recordatorios, seguimiento de hábitos y análisis estadístico.</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">Flutter</span>
+                        <span class="tecnologia">Firebase</span>
+                        <span class="tecnologia">Diseño UI</span>
+                    </div>
+                    <div class="proyecto-links">
+                        <a href="https://github.com/noctics123/Productivity-App" target="_blank"><i class="fab fa-github"></i> Ver Código</a>
+                    </div>
+                </div>
+                
+                <div class="proyecto-item">
+                    <h3>[Tu otro proyecto destacado]</h3>
+                    <p>[Descripción detallada de tu proyecto]</p>
+                    <div class="tecnologias">
+                        <span class="tecnologia">[Tecnología 1]</span>
+                        <span class="tecnologia">[Tecnología 2]</span>
+                        <span class="tecnologia">[Tecnología 3]</span>
+                    </div>
+                    <div class="proyecto-links">
+                        <a href="[URL del repositorio]" target="_blank"><i class="fab fa-github"></i> Ver Código</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section id="contacto" class="seccion">
+        <div class="container">
+            <h2><i class="fas fa-envelope"></i> Contacto</h2>
+            <div class="contenido-seccion">
+                <div class="contacto-content">
+                    <div class="contacto-info">
+                        <h3>¡Contáctame!</h3>
+                        <p>Si estás interesado en trabajar conmigo o tienes alguna pregunta, no dudes en ponerte en contacto. Estoy siempre abierto a nuevas oportunidades y colaboraciones.</p>
+                        
+                        <div class="contacto-detalles">
+                            <div class="detalle">
+                                <i class="fas fa-envelope"></i>
+                                <div>
+                                    <h4>Email</h4>
+                                    <p>ruben.quispe@example.com</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detalle">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <h4>Teléfono</h4>
+                                    <p>+51 999 999 999</p>
+                                </div>
+                            </div>
+                            
+                            <div class="detalle">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <h4>Ubicación</h4>
+                                    <p>Lima, Perú</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <form id="contactForm" class="contacto-form">
+                        <div class="form-group">
+                            <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre" required>
+                            <i class="fas fa-user"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Tu Email" required>
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        
+                        <div class="form-group">
+                            <input type="text" id="asunto" name="asunto" placeholder="Asunto" required>
+                            <i class="fas fa-tag"></i>
+                        </div>
+                        
+                        <div class="form-group-full">
+                            <textarea id="mensaje" name="mensaje" placeholder="Tu Mensaje" rows="5" required></textarea>
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer class="pie-pagina">
+        <div class="container">
+            <p>&copy; 2025 Rubén D. Quispe. Todos los derechos reservados.</p>
+            <div class="redes-sociales">
+                <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank" data-tooltip="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" data-tooltip="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" data-tooltip="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank" data-tooltip="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
