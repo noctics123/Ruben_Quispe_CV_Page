@@ -499,3 +499,231 @@ document.getElementById('contactForm')?.addEventListener('submit', function(e) {
         submitBtn.disabled = false;
     }, 2000);
 });
+
+// Función para generar código animado
+function generarCodigoAnimado() {
+    const codigoLines = [
+        "def analyze_data(dataset):",
+        "    insights = []",
+        "    for data in dataset:",
+        "        if data.pattern:",
+        "            insights.append(extract_insight(data))",
+        "    return insights",
+        "",
+        "class MachineLearningAgent:",
+        "    def __init__(self):",
+        "        self.model = self.train_model()",
+        "",
+        "    def predict(self, input_data):",
+        "        return self.model.predict(input_data)",
+        "",
+        "df = pd.read_csv('data.csv')",
+        "model = train_model(df)",
+        "predictions = model.predict(new_data)",
+        "",
+        "console.log('IA Agent initialized...');",
+        "const dataProcessor = new DataProcessor();",
+        "dataProcessor.analyze(realTimeData);",
+        "",
+        "{",
+        "  \"ai_agent\": \"active\",",
+        "  \"status\": \"processing\",",
+        "  \"data_streams\": 5,",
+        "  \"insights_generated\": 247",
+        "}",
+        "",
+        "// Algoritmo de análisis de datos",
+        "for (let i = 0; i < data.length; i++) {",
+        "  if (data[i].value > threshold) {",
+        "    triggerInsight(data[i]);",
+        "  }",
+        "}"
+    ];
+    
+    const codigoContainer = document.getElementById('codigoAnimado');
+    
+    // Crear 15 líneas de código animadas
+    for (let i = 0; i < 15; i++) {
+        const line = document.createElement('div');
+        line.className = 'codigo-linea';
+        line.textContent = codigoLines[Math.floor(Math.random() * codigoLines.length)];
+        line.style.animationDelay = `${Math.random() * 10}s`;
+        line.style.left = `${Math.random() * 100}%`;
+        codigoContainer.appendChild(line);
+    }
+}
+
+// Función para inicializar terminal interactiva
+function initTerminal() {
+    const terminal = document.getElementById('terminal');
+    const content = document.getElementById('terminalContent');
+    
+    // Mostrar terminal después de 5 segundos para sorpresa
+    setTimeout(() => {
+        terminal.style.display = 'block';
+        terminal.style.animation = 'fadeIn 1s ease';
+        
+        // Agregar efecto de parpadeo al cursor
+        setInterval(() => {
+            const lastLine = content.querySelector('.terminal-line:last-child');
+            if (lastLine) {
+                const output = lastLine.querySelector('.terminal-output');
+                if (output) {
+                    output.innerHTML = output.innerHTML.replace(/\|$/, '') + (output.innerHTML.endsWith('|') ? '' : '|');
+                }
+            }
+        }, 500);
+    }, 5000);
+}
+
+// Función para escribir en la terminal
+function escribirEnTerminal(texto, delay = 100) {
+    const content = document.getElementById('terminalContent');
+    const line = document.createElement('div');
+    line.className = 'terminal-line';
+    line.innerHTML = `<span class="terminal-prompt">user@ruben-quispe:~$</span> <span class="terminal-output">${texto}|</span>`;
+    content.appendChild(line);
+    content.scrollTop = content.scrollHeight;
+}
+
+// Función para ejecutar comandos simulados en la terminal
+function ejecutarComandoTerminal(comando) {
+    const content = document.getElementById('terminalContent');
+    const promptLine = document.createElement('div');
+    promptLine.className = 'terminal-line';
+    promptLine.innerHTML = `<span class="terminal-prompt">user@ruben-quispe:~$</span> <span class="terminal-output">${comando}</span>`;
+    content.appendChild(promptLine);
+    
+    // Simular procesamiento
+    setTimeout(() => {
+        let respuesta = '';
+        
+        switch(comando.toLowerCase()) {
+            case 'help':
+                respuesta = 'Comandos disponibles: about, skills, projects, experience, clear';
+                break;
+            case 'about':
+                respuesta = 'Rubén D. Quispe - Systems Engineer | Data Analytics Specialist';
+                break;
+            case 'skills':
+                respuesta = 'Python, JavaScript, SQL, Machine Learning, Data Analysis, AI Agents';
+                break;
+            case 'projects':
+                respuesta = '1. IEEE Computer Society UTP Website\n2. AR Project Creation\n3. Productivity Mobile App';
+                break;
+            case 'experience':
+                respuesta = 'NTT DATA Europe & Latam - Systems Engineer\nIEEE UTP Perú - Web Master Team';
+                break;
+            case 'clear':
+                content.innerHTML = '';
+                return;
+            default:
+                respuesta = `Comando no reconocido: ${comando}. Escribe 'help' para ver comandos disponibles.`;
+        }
+        
+        const outputLine = document.createElement('div');
+        outputLine.className = 'terminal-line';
+        outputLine.innerHTML = `<span class="terminal-output">${respuesta}</span>`;
+        content.appendChild(outputLine);
+        content.scrollTop = content.scrollHeight;
+    }, 500);
+}
+
+// Función para alternar la visibilidad de la terminal
+function toggleTerminal() {
+    const terminal = document.getElementById('terminal');
+    if (terminal.style.display === 'none' || !terminal.style.display) {
+        terminal.style.display = 'block';
+        escribirEnTerminal('Terminal activada...', 0);
+    } else {
+        terminal.style.display = 'none';
+    }
+}
+
+// Función para inicializar efectos de IA y Data Science
+function initIAEffects() {
+    // Crear más elementos de gráficos animados para IA/Data Science
+    const iaContainer = document.querySelector('.ia-data-container');
+    const graficoTipos = [
+        '<i class="fas fa-project-diagram"></i>', // Gráfico de red
+        '<i class="fas fa-chart-line"></i>',     // Gráfico de línea
+        '<i class="fas fa-brain"></i>',          // Cerebro de IA
+        '<i class="fas fa-database"></i>',       // Base de datos
+        '<i class="fas fa-robot"></i>'           // Robot
+    ];
+    
+    for (let i = 0; i < 8; i++) {
+        const grafico = document.createElement('div');
+        grafico.className = 'grafico-animado';
+        grafico.style.top = `${Math.random() * 100}%`;
+        grafico.style.left = `${Math.random() * 100}%`;
+        grafico.style.animationDuration = `${15 + Math.random() * 15}s`;
+        grafico.innerHTML = graficoTipos[Math.floor(Math.random() * graficoTipos.length)];
+        grafico.style.fontSize = `${20 + Math.random() * 20}px`;
+        grafico.style.display = 'flex';
+        grafico.style.alignItems = 'center';
+        grafico.style.justifyContent = 'center';
+        grafico.style.color = '#64ffda';
+        iaContainer.appendChild(grafico);
+    }
+}
+
+// Función para crear efecto de ondulación en habilidades
+function initHabilidadesWave() {
+    document.querySelectorAll('.habilidad-progreso').forEach((bar, index) => {
+        // Agregar efecto de ondulación al hacer hover
+        bar.addEventListener('mouseenter', () => {
+            const relleno = bar.querySelector('.relleno');
+            relleno.style.background = 'linear-gradient(90deg, #fc00ff, #00dbde, #fc00ff)';
+            relleno.style.backgroundSize = '200% 100%';
+            relleno.style.animation = 'wave 0.5s linear infinite';
+        });
+        
+        bar.addEventListener('mouseleave', () => {
+            const relleno = bar.querySelector('.relleno');
+            relleno.style.background = 'linear-gradient(90deg, #00dbde, #fc00ff)';
+            relleno.style.backgroundSize = '100% 100%';
+            relleno.style.animation = 'shine 2s infinite';
+        });
+    });
+    
+    // Agregar animación CSS para el efecto de onda
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes wave {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+    `;
+    document.head.appendChild(style);
+}
+
+// Inicializar todas las funciones al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    generarCodigoAnimado();
+    initTerminal();
+    initIAEffects();
+    initHabilidadesWave();
+    
+    // Agregar eventos para la terminal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === '`') { // Usar la tecla ` para abrir/cerrar la terminal
+            toggleTerminal();
+        }
+    });
+    
+    // Comandos de terminal simulados
+    setTimeout(() => {
+        if (document.getElementById('terminal').style.display !== 'none') {
+            escribirEnTerminal('Sistema IA activado. Escribe "help" para comandos disponibles.', 0);
+        }
+    }, 6000);
+});
+
+// Agregar evento para detectar cuando se escribe en la terminal
+document.addEventListener('click', function(e) {
+    // Si se hace clic en la terminal, se puede agregar lógica de entrada aquí
+    if (e.target.closest('.terminal')) {
+        // Lógica para manejar la entrada de texto en la terminal
+    }
+});
