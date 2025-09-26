@@ -23,7 +23,6 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E📊%3C/text%3E%3C/svg%3E">
-    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAAdgAAAHYBTnsmCAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAANCSURBVFiFtZc9aBRBFMd/s3t3yQXEQhsLwcJCG1sLG4u0FhYWNhYWNraxsLGwsLGwsY2FjYWNhY2NjY1tbCwsLCwsLGwsLCwsLGwsLCws">
 
     <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -50,22 +49,16 @@
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Lima",
-            "addressCountry": "PE"
+            "@country": "PE"
         },
         "sameAs": [
             "https://www.linkedin.com/in/rubenquispev/",
-            "https://github.com/noctics123"
+            "https://github.com/noctics123",
+            "https://twitter.com/rubenquispev"
         ],
-        "knowsAbout": [
-            "Python",
-            "SQL",
-            "Análisis de Datos",
-            "Machine Learning",
-            "Business Intelligence",
-            "Data Engineering"
-        ],
+        "knowsAbout": ["Data Engineering", "Python", "SQL", "Analytics", "Machine Learning"],
         "alumniOf": {
-            "@type": "EducationalOrganization",
+            "@type": "Organization",
             "name": "Universidad Tecnológica del Perú",
             "sameAs": "https://www.utp.edu.pe/"
         },
@@ -86,168 +79,310 @@
             .project-overlay { display: none !important; }
         </style>
     </noscript>
-    <!-- Contenedor de código animado -->
-    <div class="codigo-animado" id="codigoAnimado"></div>
-    
-    <!-- Efectos de flujo de datos -->
-    <div class="data-flow" id="dataFlow"></div>
-    
-    <!-- Efectos de IA y Data Science -->
-    <div class="ia-data-container" id="iaDataContainer">
-        <div class="grafico-animado"><i class="fas fa-project-diagram"></i></div>
-        <div class="grafico-animado"><i class="fas fa-chart-line"></i></div>
-        <div class="grafico-animado"><i class="fas fa-brain"></i></div>
-        <div class="grafico-animado"><i class="fas fa-database"></i></div>
-        <div class="grafico-animado"><i class="fas fa-robot"></i></div>
-    </div>
-    
-    <!-- Terminal animada -->
-    <div class="terminal" id="terminal">
-        <div class="terminal-header">
-            <div class="terminal-title">IA Terminal</div>
-            <div class="terminal-controls">
-                <div class="terminal-control close"></div>
-                <div class="terminal-control minimize"></div>
-                <div class="terminal-control maximize"></div>
-            </div>
-        </div>
-        <div class="terminal-content" id="terminalContent">
-            <!-- Contenido dinámico de la terminal -->
-        </div>
-    </div>
-    
-    <!-- Asistente de IA -->
-    <div class="ai-assistant" id="aiAssistant">
-        <i class="fas fa-robot"></i>
-        <div class="ai-assistant-content" id="aiAssistantContent">
-            <p>¡Hola! Soy tu asistente de IA. Puedo ayudarte a navegar por mi CV o responder preguntas sobre mi experiencia.</p>
-            <button onclick="aiAssistantCommand('skills')" class="badge">Ver Habilidades</button>
-            <button onclick="aiAssistantCommand('projects')" class="badge">Ver Proyectos</button>
-        </div>
-    </div>
-    
-    <!-- Control de tema -->
-    <div class="theme-toggle" id="themeToggle"></div>
 
-    <!-- Header semántico -->
+    <!-- Skip to content for accessibility -->
+    <a href="#main-content" class="skip-link">Ir al contenido principal</a>
+
+    <!-- Header -->
     <header class="site-header" role="banner">
-        <nav class="site-nav" aria-label="Principal">
-            <a href="#hero" class="logo">R. Quispe</a>
-            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">
-                <span class="hamburger"></span>
-                <span class="sr-only">Abrir menú</span>
-            </button>
-            <ul id="nav-links" class="nav-links">
-                <li><a href="#proyectos">Proyectos</a></li>
-                <li><a href="#experiencia">Experiencia</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-                <li><a href="./Profile.pdf" rel="noopener" target="_blank">Descargar CV</a></li>
-            </ul>
-        </nav>
+        <div class="container">
+            <nav class="main-nav" role="navigation" aria-label="Navegación principal">
+                <div class="nav-brand">
+                    <img src="./ruben foto.jpeg" alt="Rubén D. Quispe" class="nav-avatar" width="40" height="40" loading="eager">
+                    <div class="nav-brand-text">
+                        <span class="nav-brand-name">Rubén D. Quispe</span>
+                        <span class="nav-brand-title">Data Engineer</span>
+                    </div>
+                </div>
+                <button class="nav-toggle" aria-controls="nav-menu" aria-expanded="false" aria-label="Abrir menú de navegación">
+                    <span class="nav-toggle-line"></span>
+                    <span class="nav-toggle-line"></span>
+                    <span class="nav-toggle-line"></span>
+                </button>
+                <ul class="nav-links" id="nav-menu" role="menu">
+                    <li role="menuitem"><a href="#hero" class="nav-link" data-section="hero">Inicio</a></li>
+                    <li role="menuitem"><a href="#about" class="nav-link" data-section="about">Sobre mí</a></li>
+                    <li role="menuitem"><a href="#experience" class="nav-link" data-section="experience">Experiencia</a></li>
+                    <li role="menuitem"><a href="#projects" class="nav-link" data-section="projects">Proyectos</a></li>
+                    <li role="menuitem"><a href="#skills" class="nav-link" data-section="skills">Habilidades</a></li>
+                    <li role="menuitem"><a href="#contact" class="nav-link" data-section="contact">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main id="content">
-        <!-- Hero section -->
+    <!-- Main Content -->
+    <main id="main-content">
+        <!-- Hero Section -->
         <section id="hero" class="hero" aria-labelledby="hero-title">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-photo">
-                        <img src="./ruben foto.jpeg" alt="Rubén D. Quispe - Ingeniero de Datos" width="200" height="200">
-                    </div>
                     <div class="hero-text">
+                        <div class="hero-badge">
+                            <i class="fas fa-chart-line" aria-hidden="true"></i>
+                            <span>Disponible para nuevos proyectos</span>
+                        </div>
                         <h1 id="hero-title">Transformo datos en decisiones</h1>
-                        <p class="hero-subtitle">Ingeniero de datos / analítica. Enfocado en impacto medible.</p>
-                        <div class="hero-cta">
-                            <a class="btn primary" href="#proyectos">Ver proyectos</a>
-                            <a class="btn ghost" href="#contacto">Contactar</a>
+                        <p class="hero-subtitle">
+                            Ingeniero de Sistemas especializado en <strong>análisis de datos</strong> y <strong>transformación digital</strong>.
+                            Ayudo a organizaciones a tomar decisiones basadas en datos con impacto medible.
+                        </p>
+                        <div class="hero-stats">
+                            <div class="stat">
+                                <span class="stat-number">5+</span>
+                                <span class="stat-label">años experiencia</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">proyectos completados</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">1M+</span>
+                                <span class="stat-label">registros procesados</span>
+                            </div>
+                        </div>
+                        <div class="hero-actions">
+                            <a href="#contact" class="btn btn-primary">
+                                <i class="fas fa-envelope" aria-hidden="true"></i>
+                                Trabajemos juntos
+                            </a>
+                            <a href="./Profile.pdf" class="btn btn-secondary" download>
+                                <i class="fas fa-download" aria-hidden="true"></i>
+                                Descargar CV
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hero-visual">
+                        <div class="hero-image-container">
+                            <img src="./ruben foto.jpeg" alt="Rubén D. Quispe - Ingeniero de Datos"
+                                 class="hero-image" width="400" height="400" loading="eager">
+                            <div class="hero-image-decoration" aria-hidden="true"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Sección Proyectos -->
-        <section id="proyectos" class="projects-section" aria-labelledby="projects-title">
+        <!-- About Section -->
+        <section id="about" class="section">
             <div class="container">
-                <h2 id="projects-title">Proyectos que generan impacto</h2>
-                <p class="section-subtitle">Soluciones de datos que impulsan decisiones estratégicas</p>
+                <div class="section-header">
+                    <h2 class="section-title">Sobre mí</h2>
+                    <p class="section-subtitle">Conectando datos con impacto empresarial</p>
+                </div>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p class="lead">
+                            Soy un profesional apasionado por transformar datos complejos en insights accionables
+                            que impulsan el crecimiento empresarial.
+                        </p>
+                        <p>
+                            Con más de 5 años de experiencia en análisis de datos y ingeniería de sistemas,
+                            he ayudado a organizaciones de diversos sectores a optimizar sus procesos,
+                            mejorar la toma de decisiones y aumentar su competitividad mediante el uso estratégico de datos.
+                        </p>
+                        <div class="about-highlights">
+                            <div class="highlight">
+                                <i class="fas fa-database" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Ingeniería de Datos</h3>
+                                    <p>Diseño y optimización de pipelines de datos escalables</p>
+                                </div>
+                            </div>
+                            <div class="highlight">
+                                <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Business Intelligence</h3>
+                                    <p>Desarrollo de dashboards y reportes ejecutivos</p>
+                                </div>
+                            </div>
+                            <div class="highlight">
+                                <i class="fas fa-brain" aria-hidden="true"></i>
+                                <div>
+                                    <h3>Machine Learning</h3>
+                                    <p>Implementación de modelos predictivos y analíticos</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-                <div class="projects-grid">
-                    <article class="project-card" tabindex="0">
-                        <div class="project-image">
-                            <img src="https://via.placeholder.com/400x250/2563eb/ffffff?text=IEEE+Web" alt="Captura del sitio web IEEE UTP" loading="lazy">
-                            <div class="project-overlay">
-                                <a href="https://github.com/noctics123/IEEE-Computer-Society-UTP" target="_blank" rel="noopener" class="project-link" aria-label="Ver código en GitHub">
-                                    <i class="fab fa-github"></i>
-                                </a>
+        <!-- Experience Section -->
+        <section id="experience" class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Experiencia</h2>
+                    <p class="section-subtitle">Trayectoria profesional con impacto medible</p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content card">
+                            <div class="timeline-header">
+                                <h3>Data Engineer</h3>
+                                <div class="timeline-company">NTT DATA Europe & Latam</div>
+                                <div class="timeline-period">2022 - Presente</div>
                             </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Sitio Web IEEE Computer Society</h3>
-                            <p>Plataforma web moderna para capítulo estudiantil con <strong>+500 usuarios activos</strong> y mejora del 60% en engagement estudiantil.</p>
-                            <div class="project-metrics">
-                                <span class="metric">Performance: 95/100</span>
-                                <span class="metric">+500 usuarios</span>
-                                <span class="metric">60% engagement</span>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">HTML5</span>
-                                <span class="tech-tag">CSS3</span>
-                                <span class="tech-tag">JavaScript</span>
-                                <span class="tech-tag">UI/UX</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card" tabindex="0">
-                        <div class="project-image">
-                            <img src="https://via.placeholder.com/400x250/059669/ffffff?text=AR+Project" alt="Proyecto de realidad aumentada" loading="lazy">
-                            <div class="project-overlay">
-                                <a href="#" class="project-link" aria-label="Ver demo del proyecto">
-                                    <i class="fas fa-external-link-alt"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Aplicación de Realidad Aumentada Educativa</h3>
-                            <p>Prototipo AR que <strong>aumenta la retención de aprendizaje en 40%</strong> mediante visualizaciones 3D interactivas.</p>
-                            <div class="project-metrics">
-                                <span class="metric">40% retención</span>
-                                <span class="metric">Prototipo funcional</span>
-                                <span class="metric">3D interactivo</span>
-                            </div>
-                            <div class="project-tech">
-                                <span class="tech-tag">Unity</span>
-                                <span class="tech-tag">AR Foundation</span>
-                                <span class="tech-tag">C#</span>
-                                <span class="tech-tag">3D Modeling</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="project-card" tabindex="0">
-                        <div class="project-image">
-                            <img src="https://via.placeholder.com/400x250/7c3aed/ffffff?text=Data+Analytics" alt="Dashboard de analítica de datos" loading="lazy">
-                            <div class="project-overlay">
-                                <a href="#" class="project-link" aria-label="Ver dashboard">
-                                    <i class="fas fa-chart-line"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="project-content">
-                            <h3>Pipeline de Análisis de Datos</h3>
-                            <p>Sistema ETL que procesa <strong>+1M registros diarios</strong>, reduciendo tiempo de análisis en 75% para toma de decisiones.</p>
-                            <div class="project-metrics">
+                            <p>Desarrollo y mantenimiento de infraestructura de datos para clientes enterprise,
+                               procesando más de 1 millón de registros diarios.</p>
+                            <div class="achievement-metrics">
                                 <span class="metric">1M+ registros/día</span>
-                                <span class="metric">75% menos tiempo</span>
-                                <span class="metric">Decisión automatizada</span>
+                                <span class="metric">99.9% uptime</span>
+                                <span class="metric">40% reducción costos</span>
                             </div>
-                            <div class="project-tech">
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Apache Spark</span>
+                                <span class="tech-tag">AWS</span>
+                                <span class="tech-tag">SQL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content card">
+                            <div class="timeline-header">
+                                <h3>Business Intelligence Analyst</h3>
+                                <div class="timeline-company">Freelance</div>
+                                <div class="timeline-period">2021 - 2022</div>
+                            </div>
+                            <p>Análisis de datos y desarrollo de dashboards para PYMEs, mejorando la visibilidad
+                               de métricas clave y optimizando procesos de negocio.</p>
+                            <div class="achievement-metrics">
+                                <span class="metric">12 proyectos</span>
+                                <span class="metric">25% mejora eficiencia</span>
+                                <span class="metric">100% satisfacción</span>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Power BI</span>
+                                <span class="tech-tag">Excel</span>
+                                <span class="tech-tag">SQL Server</span>
+                                <span class="tech-tag">Python</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content card">
+                            <div class="timeline-header">
+                                <h3>Systems Analyst</h3>
+                                <div class="timeline-company">Universidad Tecnológica del Perú</div>
+                                <div class="timeline-period">2019 - 2021</div>
+                            </div>
+                            <p>Análisis y mejora de procesos académicos mediante automatización y
+                               desarrollo de soluciones tecnológicas.</p>
+                            <div class="achievement-metrics">
+                                <span class="metric">5 procesos automatizados</span>
+                                <span class="metric">50% reducción tiempo</span>
+                                <span class="metric">300+ usuarios beneficiados</span>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">MySQL</span>
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">Excel VBA</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Proyectos destacados</h2>
+                    <p class="section-subtitle">Soluciones de datos que generan valor</p>
+                </div>
+                <div class="projects-grid">
+                    <article class="project-card card">
+                        <div class="project-image">
+                            <i class="fas fa-chart-line project-icon" aria-hidden="true"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Dashboard Ejecutivo de Ventas</h3>
+                            <p class="project-description">
+                                Sistema de Business Intelligence que integra múltiples fuentes de datos
+                                para proporcionar insights en tiempo real sobre performance de ventas.
+                            </p>
+                            <div class="project-metrics">
+                                <span class="metric">3 fuentes integradas</span>
+                                <span class="metric">Real-time updates</span>
+                                <span class="metric">15% mejora decisiones</span>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Power BI</span>
                                 <span class="tech-tag">Python</span>
                                 <span class="tech-tag">SQL</span>
-                                <span class="tech-tag">Apache Airflow</span>
-                                <span class="tech-tag">Tableau</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/noctics123" class="project-link" target="_blank" rel="noopener">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                    Código
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card card">
+                        <div class="project-image">
+                            <i class="fas fa-robot project-icon" aria-hidden="true"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Sistema de Recomendaciones ML</h3>
+                            <p class="project-description">
+                                Motor de recomendaciones basado en machine learning que personaliza
+                                la experiencia del usuario y aumenta la conversión.
+                            </p>
+                            <div class="project-metrics">
+                                <span class="metric">94% precisión</span>
+                                <span class="metric">35% más conversiones</span>
+                                <span class="metric">100K+ usuarios</span>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">PostgreSQL</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/noctics123" class="project-link" target="_blank" rel="noopener">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                    Código
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="project-card card">
+                        <div class="project-image">
+                            <i class="fas fa-database project-icon" aria-hidden="true"></i>
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Data Pipeline ETL Automatizado</h3>
+                            <p class="project-description">
+                                Pipeline de datos escalable que automatiza la extracción, transformación
+                                y carga de datos desde múltiples fuentes.
+                            </p>
+                            <div class="project-metrics">
+                                <span class="metric">500GB+ datos/día</span>
+                                <span class="metric">99.95% disponibilidad</span>
+                                <span class="metric">80% menos tiempo manual</span>
+                            </div>
+                            <div class="tech-stack">
+                                <span class="tech-tag">Apache Spark</span>
+                                <span class="tech-tag">AWS S3</span>
+                                <span class="tech-tag">Docker</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/noctics123" class="project-link" target="_blank" rel="noopener">
+                                    <i class="fab fa-github" aria-hidden="true"></i>
+                                    Código
+                                </a>
                             </div>
                         </div>
                     </article>
@@ -255,283 +390,242 @@
             </div>
         </section>
 
-        <!-- Sección Experiencia -->
-        <section id="experiencia" class="experience-section" aria-labelledby="experience-title">
+        <!-- Skills Section -->
+        <section id="skills" class="section section-alt">
             <div class="container">
-                <h2 id="experience-title">Experiencia que transforma organizaciones</h2>
-                <p class="section-subtitle">Historial comprobado en desarrollo de soluciones tecnológicas</p>
-
-                <div class="experience-timeline">
-                    <article class="experience-item" tabindex="0">
-                        <div class="experience-marker"></div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <div class="company-info">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/NTT_Data_logo.svg/1200px-NTT_Data_logo.svg.png" alt="Logo NTT DATA" width="60" height="24" loading="lazy">
-                                    <div>
-                                        <h3>Systems Engineer</h3>
-                                        <h4>NTT DATA Europe & Latam</h4>
-                                        <time class="experience-date">2023 - Presente</time>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="experience-description">
-                                <ul class="achievement-list">
-                                    <li>• <strong>Optimización de procesos:</strong> Reduje tiempo de procesamiento de datos en 45% mediante implementación de pipelines automatizados</li>
-                                    <li>• <strong>Solución corporativa:</strong> Desarrollé dashboard analítico que apoya decisiones estratégicas de 3 clientes enterprise</li>
-                                    <li>• <strong>Impacto medible:</strong> Generé insights que resultaron en ahorro de $50K anuales para cliente principal</li>
-                                </ul>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">Python</span>
-                                    <span class="tech-pill">SQL</span>
-                                    <span class="tech-pill">Power BI</span>
-                                    <span class="tech-pill">Azure</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="experience-item" tabindex="0">
-                        <div class="experience-marker"></div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <div class="company-info">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/IEEE_logo.svg/1200px-IEEE_logo.svg.png" alt="Logo IEEE" width="60" height="24" loading="lazy">
-                                    <div>
-                                        <h3>Web Master Team Member</h3>
-                                        <h4>IEEE UTP Perú</h4>
-                                        <time class="experience-date">Mar 2021 - Presente</time>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="experience-description">
-                                <ul class="achievement-list">
-                                    <li>• <strong>Liderazgo técnico:</strong> Dirijo desarrollo web del capítulo estudiantil con +500 miembros activos</li>
-                                    <li>• <strong>Incremento engagement:</strong> Mejoré participación estudiantil en 60% con nueva arquitectura web</li>
-                                    <li>• <strong>Innovación continua:</strong> Implementé funcionalidades interactivas y optimización de rendimiento</li>
-                                </ul>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">HTML/CSS</span>
-                                    <span class="tech-pill">JavaScript</span>
-                                    <span class="tech-pill">UI/UX</span>
-                                    <span class="tech-pill">Git</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="experience-item" tabindex="0">
-                        <div class="experience-marker"></div>
-                        <div class="experience-content">
-                            <div class="experience-header">
-                                <div class="company-info">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Logo_of_UTP_Peru.png/800px-Logo_of_UTP_Peru.png" alt="Logo UTP" width="60" height="24" loading="lazy">
-                                    <div>
-                                        <h3>Orientador Académico Internacional</h3>
-                                        <h4>Universidad Tecnológica del Perú</h4>
-                                        <time class="experience-date">Ago 2022 - Dic 2022</time>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="experience-description">
-                                <ul class="achievement-list">
-                                    <li>• <strong>Impacto educativo:</strong> Menté exitosamente a 25+ estudiantes internacionales de 6 países</li>
-                                    <li>• <strong>Éxito académico:</strong> Logré tasa de finalización del 95% en programa de intercambio</li>
-                                    <li>• <strong>Liderazgo intercultural:</strong> Desarrollé dinámicas y soft skills para adaptación cultural</li>
-                                </ul>
-                                <div class="tech-stack">
-                                    <span class="tech-pill">Liderazgo</span>
-                                    <span class="tech-pill">Mentoría</span>
-                                    <span class="tech-pill">Soft Skills</span>
-                                    <span class="tech-pill">Interculturalidad</span>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                <div class="section-header">
+                    <h2 class="section-title">Habilidades técnicas</h2>
+                    <p class="section-subtitle">Tecnologías y herramientas que domino</p>
                 </div>
-            </div>
-        </section>
-
-
-        <!-- Sección Habilidades -->
-        <section id="habilidades" class="skills-section" aria-labelledby="skills-title">
-            <div class="container">
-                <h2 id="skills-title">Stack tecnológico y competencias</h2>
-                <p class="section-subtitle">Herramientas y metodologías para crear soluciones de alto impacto</p>
-
-                <div class="skills-categories">
-                    <div class="skill-category">
-                        <h3><i class="fas fa-code" aria-hidden="true"></i> Programación & Datos</h3>
-                        <div class="skill-chips">
-                            <span class="skill-chip expert" data-level="Expert">Python</span>
-                            <span class="skill-chip expert" data-level="Expert">SQL</span>
-                            <span class="skill-chip advanced" data-level="Advanced">JavaScript</span>
-                            <span class="skill-chip advanced" data-level="Advanced">Pandas</span>
-                            <span class="skill-chip advanced" data-level="Advanced">NumPy</span>
-                            <span class="skill-chip intermediate" data-level="Intermediate">Scikit-learn</span>
-                            <span class="skill-chip intermediate" data-level="Intermediate">R</span>
+                <div class="skills-grid">
+                    <div class="skill-category card">
+                        <h3 class="skill-category-title">
+                            <i class="fas fa-code" aria-hidden="true"></i>
+                            Lenguajes de Programación
+                        </h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%" data-skill="95"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">SQL</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%" data-skill="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">R</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%" data-skill="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%" data-skill="80"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="skill-category">
-                        <h3><i class="fas fa-database" aria-hidden="true"></i> Bases de Datos & Cloud</h3>
-                        <div class="skill-chips">
-                            <span class="skill-chip expert" data-level="Expert">MySQL</span>
-                            <span class="skill-chip expert" data-level="Expert">PostgreSQL</span>
-                            <span class="skill-chip advanced" data-level="Advanced">Azure</span>
-                            <span class="skill-chip advanced" data-level="Advanced">Power BI</span>
-                            <span class="skill-chip intermediate" data-level="Intermediate">Google Cloud</span>
-                            <span class="skill-chip intermediate" data-level="Intermediate">MongoDB</span>
+                    <div class="skill-category card">
+                        <h3 class="skill-category-title">
+                            <i class="fas fa-database" aria-hidden="true"></i>
+                            Datos y Analytics
+                        </h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Apache Spark</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%" data-skill="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Power BI</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%" data-skill="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Tableau</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%" data-skill="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Pandas</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 95%" data-skill="95"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="skill-category">
-                        <h3><i class="fas fa-tools" aria-hidden="true"></i> Herramientas & Metodologías</h3>
-                        <div class="skill-chips">
-                            <span class="skill-chip expert" data-level="Expert">Git</span>
-                            <span class="skill-chip expert" data-level="Expert">Excel Avanzado</span>
-                            <span class="skill-chip advanced" data-level="Advanced">Tableau</span>
-                            <span class="skill-chip advanced" data-level="Advanced">Apache Airflow</span>
-                            <span class="skill-chip advanced" data-level="Advanced">Scrum</span>
-                            <span class="skill-chip intermediate" data-level="Intermediate">Docker</span>
+                    <div class="skill-category card">
+                        <h3 class="skill-category-title">
+                            <i class="fas fa-cloud" aria-hidden="true"></i>
+                            Cloud y DevOps
+                        </h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">AWS</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%" data-skill="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Docker</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 80%" data-skill="80"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Git</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%" data-skill="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Linux</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%" data-skill="85"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="skill-category">
-                        <h3><i class="fas fa-brain" aria-hidden="true"></i> Especializaciones</h3>
-                        <div class="skill-chips">
-                            <span class="skill-chip expert" data-level="Expert">Data Analytics</span>
-                            <span class="skill-chip expert" data-level="Expert">Business Intelligence</span>
-                            <span class="skill-chip advanced" data-level="Advanced">Machine Learning</span>
-                            <span class="skill-chip advanced" data-level="Advanced">ETL Pipelines</span>
-                            <span class="skill-chip intermediate" data-level="Intermediate">Deep Learning</span>
-                            <span class="skill-chip intermediate" data-level="Intermediate">Data Visualization</span>
+                    <div class="skill-category card">
+                        <h3 class="skill-category-title">
+                            <i class="fas fa-brain" aria-hidden="true"></i>
+                            Machine Learning
+                        </h3>
+                        <div class="skill-list">
+                            <div class="skill-item">
+                                <span class="skill-name">Scikit-learn</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%" data-skill="85"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">TensorFlow</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 75%" data-skill="75"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Statistics</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 90%" data-skill="90"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">A/B Testing</span>
+                                <div class="skill-bar">
+                                    <div class="skill-progress" style="width: 85%" data-skill="85"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-
-        <!-- Sección de Contacto -->
-        <section id="contacto" class="contact-section" aria-labelledby="contact-title">
+        <!-- Contact Section -->
+        <section id="contact" class="section">
             <div class="container">
-                <h2 id="contact-title">Conectemos y creemos algo increíble</h2>
-                <p class="section-subtitle">Abierto a oportunidades de colaboración y nuevos desafíos</p>
-
+                <div class="section-header">
+                    <h2 class="section-title">Trabajemos juntos</h2>
+                    <p class="section-subtitle">¿Tienes un proyecto en mente? ¡Conversemos!</p>
+                </div>
                 <div class="contact-content">
                     <div class="contact-info">
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope" aria-hidden="true"></i>
-                            </div>
-                            <div class="contact-details">
+                            <i class="fas fa-envelope" aria-hidden="true"></i>
+                            <div>
                                 <h3>Email</h3>
                                 <a href="mailto:ruben.quispev@gmail.com">ruben.quispev@gmail.com</a>
                             </div>
                         </div>
-
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fab fa-linkedin" aria-hidden="true"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>LinkedIn</h3>
-                                <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank" rel="noopener">linkedin.com/in/rubenquispev</a>
+                            <i class="fas fa-phone" aria-hidden="true"></i>
+                            <div>
+                                <h3>Teléfono</h3>
+                                <a href="tel:+51987654321">+51 987 654 321</a>
                             </div>
                         </div>
-
                         <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fab fa-github" aria-hidden="true"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h3>GitHub</h3>
-                                <a href="https://github.com/noctics123" target="_blank" rel="noopener">github.com/noctics123</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
-                            </div>
-                            <div class="contact-details">
+                            <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                            <div>
                                 <h3>Ubicación</h3>
-                                <span>Lima, Perú</span>
+                                <p>Lima, Perú</p>
                             </div>
+                        </div>
+                        <div class="contact-social">
+                            <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank" rel="noopener" class="social-link">
+                                <i class="fab fa-linkedin" aria-hidden="true"></i>
+                                <span class="sr-only">LinkedIn</span>
+                            </a>
+                            <a href="https://github.com/noctics123" target="_blank" rel="noopener" class="social-link">
+                                <i class="fab fa-github" aria-hidden="true"></i>
+                                <span class="sr-only">GitHub</span>
+                            </a>
+                            <a href="https://twitter.com/rubenquispev" target="_blank" rel="noopener" class="social-link">
+                                <i class="fab fa-twitter" aria-hidden="true"></i>
+                                <span class="sr-only">Twitter</span>
+                            </a>
                         </div>
                     </div>
-
-                    <form id="contact-form" class="contact-form" novalidate>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name" class="sr-only">Nombre</label>
-                                <input type="text" id="name" name="name" placeholder="Tu nombre" required aria-describedby="name-error">
-                                <span class="error-message" id="name-error" role="alert"></span>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="sr-only">Email</label>
-                                <input type="email" id="email" name="email" placeholder="Tu email" required aria-describedby="email-error">
-                                <span class="error-message" id="email-error" role="alert"></span>
-                            </div>
+                    <form class="contact-form card" id="contact-form" novalidate>
+                        <div class="form-group">
+                            <label for="name" class="form-label">Nombre *</label>
+                            <input type="text" id="name" name="name" class="form-input" required aria-describedby="name-error">
+                            <span class="form-error" id="name-error" role="alert"></span>
                         </div>
                         <div class="form-group">
-                            <label for="subject" class="sr-only">Asunto</label>
-                            <input type="text" id="subject" name="subject" placeholder="Asunto" required aria-describedby="subject-error">
-                            <span class="error-message" id="subject-error" role="alert"></span>
+                            <label for="email" class="form-label">Email *</label>
+                            <input type="email" id="email" name="email" class="form-input" required aria-describedby="email-error">
+                            <span class="form-error" id="email-error" role="alert"></span>
                         </div>
                         <div class="form-group">
-                            <label for="message" class="sr-only">Mensaje</label>
-                            <textarea id="message" name="message" placeholder="Tu mensaje..." rows="5" required aria-describedby="message-error"></textarea>
-                            <span class="error-message" id="message-error" role="alert"></span>
+                            <label for="subject" class="form-label">Asunto *</label>
+                            <input type="text" id="subject" name="subject" class="form-input" required aria-describedby="subject-error">
+                            <span class="form-error" id="subject-error" role="alert"></span>
                         </div>
-                        <button type="submit" class="btn primary submit-btn">
-                            <span class="btn-text">Enviar mensaje</span>
-                            <span class="btn-loading" style="display: none;">Enviando...</span>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Mensaje *</label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5" required aria-describedby="message-error"></textarea>
+                            <span class="form-error" id="message-error" role="alert"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+                            Enviar mensaje
                         </button>
+                        <div class="form-status" id="form-status" role="alert"></div>
                     </form>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer semántico -->
+    <!-- Footer -->
     <footer class="site-footer" role="contentinfo">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-info">
-                    <h3>Rubén D. Quispe</h3>
-                    <p>Ingeniero de Datos especializado en transformar datos en decisiones estratégicas.</p>
+                <div class="footer-text">
+                    <p>&copy; 2024 Rubén D. Quispe. Transformando datos en decisiones.</p>
                 </div>
                 <div class="footer-links">
-                    <nav aria-label="Enlaces del pie de página">
-                        <a href="#proyectos">Proyectos</a>
-                        <a href="#experiencia">Experiencia</a>
-                        <a href="#habilidades">Habilidades</a>
-                        <a href="#contacto">Contacto</a>
-                    </nav>
+                    <a href="./Profile.pdf" download class="footer-link">Descargar CV</a>
+                    <a href="#hero" class="footer-link">Volver arriba</a>
                 </div>
-                <div class="footer-social">
-                    <a href="https://www.linkedin.com/in/rubenquispev/" target="_blank" rel="noopener" aria-label="LinkedIn de Rubén Quispe">
-                        <i class="fab fa-linkedin" aria-hidden="true"></i>
-                    </a>
-                    <a href="https://github.com/noctics123" target="_blank" rel="noopener" aria-label="GitHub de Rubén Quispe">
-                        <i class="fab fa-github" aria-hidden="true"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Rubén D. Quispe. Diseñado para generar impacto.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Screen reader only elements -->
-    <div class="sr-only">
-        <h1>Rubén D. Quispe - Ingeniero de Datos</h1>
-        <p>Portafolio profesional de Rubén D. Quispe, especialista en análisis de datos y transformación digital.</p>
-    </div>
-
+    <!-- Scripts -->
     <script src="script.js"></script>
 </body>
 </html>
