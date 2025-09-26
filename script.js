@@ -65,8 +65,17 @@ const statsObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const statElement = entry.target.querySelector('h3');
             if (statElement) {
-                const targetValue = parseInt(statElement.textContent.replace(/[^\d]/g, ''));
-                const suffix = statElement.textContent.replace(/\d+/g, '');
+                const targetValue = parseInt(statElement.getAttribute('data-target'));
+                let suffix = statElement.textContent.replace(/\d+/g, '');
+                
+                // Obtener el sufijo correcto basado en el contexto
+                if(entry.target.querySelector('p').textContent.includes('Conexiones')) {
+                    suffix = '+';
+                } else if(entry.target.querySelector('p').textContent.includes('Experiencia')) {
+                    suffix = '+ Años';
+                } else if(entry.target.querySelector('p').textContent.includes('Conexiones')) {
+                    suffix = '+';
+                }
                 
                 // Solo animar si el número es mayor que 0 y aún no se ha animado
                 if (targetValue > 0 && !statElement.dataset.animated) {
@@ -89,7 +98,10 @@ function animateValue(element, start, end, duration, suffix = '') {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const value = Math.floor(progress * (end - start) + start);
-        element.textContent = value + suffix;
+        
+        // Aplicar formato de miles si es necesario
+        const formattedValue = value.toLocaleString();
+        element.textContent = formattedValue + suffix;
         
         if (progress < 1) {
             window.requestAnimationFrame(step);
