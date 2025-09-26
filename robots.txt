@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://noctics123.github.io/Ruben_Quispe_CV_Page/sitemap.xml

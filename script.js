@@ -1,878 +1,572 @@
-// Función para desplazamiento suave al hacer clic en los enlaces de navegación
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            window.scrollTo({
-                top: target.offsetTop - 80, // Ajustar el desplazamiento para compensar la barra de navegación
-                behavior: 'smooth'
-            });
-        }
-    });
-});
+/**
+ * MODERN CV PORTFOLIO - JavaScript
+ * Author: Rubén D. Quispe
+ * Features: Mobile navigation, form validation, scroll animations, accessibility
+ */
 
-// Función para mostrar elementos al hacer scroll (animación de aparición)
-const observerOptions = {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('mostrar');
-            
-            // Agregar efecto especial para elementos específicos
-            if (entry.target.classList.contains('habilidad-progreso')) {
-                const relleno = entry.target.querySelector('.relleno');
-                if (relleno) {
-                    const width = relleno.style.width;
-                    relleno.style.width = '0';
-                    setTimeout(() => {
-                        relleno.style.transition = 'width 1.8s cubic-bezier(0.23, 1, 0.32, 1)';
-                        relleno.style.width = width;
-                    }, 150);
-                }
-            }
-        }
-    });
-}, observerOptions);
-
-// Seleccionar todos los elementos que deben animarse al hacer scroll
-document.querySelectorAll('.experiencia-item, .educacion-item, .certificacion-item, .voluntariado-item, .proyecto-item, .stat, .habilidad, .habilidad-progreso').forEach(el => {
-    el.classList.add('elemento-animado');
-    observer.observe(el);
-});
-
-// Efecto para mostrar más información al pasar el mouse sobre proyectos
-document.querySelectorAll('.proyecto-item, .experiencia-item, .educacion-item, .certificacion-item, .voluntariado-item').forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        item.style.transform = 'translateY(-12px) scale(1.02)';
-        item.style.boxShadow = '0 15px 40px rgba(100, 100, 255, 0.3)';
-    });
-    
-    item.addEventListener('mouseleave', () => {
-        item.style.transform = 'translateY(0) scale(1)';
-        item.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.2)';
-    });
-});
-
-// Función para animar las estadísticas al hacer scroll hacia ellas
-const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const statElement = entry.target.querySelector('h3');
-            if (statElement) {
-                const targetValue = parseInt(statElement.getAttribute('data-target'));
-                let suffix = statElement.textContent.replace(/\d+/g, '');
-                
-                // Obtener el sufijo correcto basado en el contexto
-                if(entry.target.querySelector('p').textContent.includes('Conexiones')) {
-                    suffix = '+';
-                } else if(entry.target.querySelector('p').textContent.includes('Experiencia')) {
-                    suffix = '+ Años';
-                } else if(entry.target.querySelector('p').textContent.includes('Conexiones')) {
-                    suffix = '+';
-                }
-                
-                // Solo animar si el número es mayor que 0 y aún no se ha animado
-                if (targetValue > 0 && !statElement.dataset.animated) {
-                    animateValue(statElement, 0, targetValue, 2000, suffix);
-                    statElement.dataset.animated = true;
-                }
-            }
-        }
-    });
-}, { threshold: 0.6 });
-
-document.querySelectorAll('.stat').forEach(stat => {
-    statsObserver.observe(stat);
-});
-
-// Función para animar valores numéricos
-function animateValue(element, start, end, duration, suffix = '') {
-    let startTimestamp = null;
-    const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
-        
-        // Aplicar formato de miles si es necesario
-        const formattedValue = value.toLocaleString();
-        element.textContent = formattedValue + suffix;
-        
-        if (progress < 1) {
-            window.requestAnimationFrame(step);
-        }
-    };
-    window.requestAnimationFrame(step);
-}
-
-// Efecto de parallax en el header
-let lastScrollY = window.scrollY;
-
-window.addEventListener('scroll', () => {
-    const scrolled = window.scrollY;
-    const parallaxElement = document.querySelector('.header');
-    
-    if (parallaxElement) {
-        const speed = 0.7;
-        parallaxElement.style.transform = `translateY(${scrolled * speed * -1}px)`;
-    }
-    
-    // Efecto de header fijo con transparencia
-    const header = document.querySelector('.header');
-    header.style.background = `rgba(10, 10, 30, ${Math.min(0.1 + scrolled/500, 0.9)})`;
-    
-    lastScrollY = scrolled;
-});
-
-// Efecto de typed animation para el subtítulo
+// DOM Content Loaded - Main initialization
 document.addEventListener('DOMContentLoaded', function() {
-    const descripcionElement = document.querySelector('.descripcion');
-    const text = "Turning Data into Actionable Insights 📊";
-    let index = 0;
-    let isDeleting = false;
-    let currentText = '';
-    let letterSpeed = 150;
+    // Initialize all features
+    initializeNavigation();
+    initializeFormValidation();
+    initializeScrollAnimations();
+    initializeAccessibility();
 
-    function typeEffect() {
-        if (isDeleting) {
-            currentText = text.substring(0, currentText.length - 1);
-        } else {
-            currentText = text.substring(0, index + 1);
-        }
-        
-        descripcionElement.textContent = currentText + '|';
-        
-        if (!isDeleting && currentText === text) {
-            letterSpeed = 2000; // Pausa al final
-            isDeleting = true;
-        } else if (isDeleting && currentText === '') {
-            letterSpeed = 150;
-            isDeleting = false;
-            index = 0;
-        } else if (isDeleting) {
-            index--;
-        } else {
-            index++;
-        }
-        
-        setTimeout(typeEffect, letterSpeed);
-    }
-    
-    if (descripcionElement) {
-        setTimeout(typeEffect, 1000);
-    }
-    
-    // Agregar efecto de particulas al background
-    createParticles();
-    
-    // Agregar efecto de ondas al footer
-    addWaveEffect();
+    console.log('🚀 Modern CV Portfolio initialized successfully');
 });
 
-// Función para crear efecto de partículas en el fondo
-function createParticles() {
-    const particlesContainer = document.createElement('div');
-    particlesContainer.id = 'particles-js';
-    particlesContainer.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    `;
-    document.body.appendChild(particlesContainer);
-    
-    // Crear partículas individuales
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.style.cssText = `
-            position: absolute;
-            background: rgba(100, 255, 218, 0.5);
-            border-radius: 50%;
-            pointer-events: none;
-            width: ${Math.random() * 4 + 1}px;
-            height: ${Math.random() * 4 + 1}px;
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation: float${Math.floor(Math.random() * 3)} 15s infinite linear;
-            opacity: ${Math.random() * 0.5 + 0.1};
-        `;
-        
-        // Definir animaciones CSS para las partículas
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes float0 {
-                0% { transform: translate(0, 0); }
-                100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
-            }
-            @keyframes float1 {
-                0% { transform: translate(0, 0); }
-                100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
-            }
-            @keyframes float2 {
-                0% { transform: translate(0, 0); }
-                100% { transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        particlesContainer.appendChild(particle);
-    }
-}
+// ============================================
+// MOBILE NAVIGATION
+// ============================================
 
-// Función para agregar efecto de ondas al footer
-function addWaveEffect() {
-    const waveContainer = document.querySelector('.pie-pagina');
-    if (waveContainer) {
-        const wave = document.createElement('div');
-        wave.className = 'wave';
-        wave.style.cssText = `
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 50px;
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.15' fill='%2364ffda'%3E%3C/path%3E%3C/svg%3E") repeat-x;
-            transform: translateX(-50%);
-            animation: wave 12s linear infinite;
-            z-index: -1;
-        `;
-        
-        // Agregar animación CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes wave {
-                0% { transform: translateX(-50%) translateZ(0px); }
-                50% { transform: translateX(-50%) translateZ(-25%); }
-                100% { transform: translateX(-50%) translateZ(-50%); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        waveContainer.style.position = 'relative';
-        waveContainer.appendChild(wave);
-    }
-}
+function initializeNavigation() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-// Efecto de brillo en habilidades al pasar el mouse
-document.querySelectorAll('.habilidad').forEach(habilidad => {
-    habilidad.addEventListener('mouseenter', function() {
-        this.style.background = 'rgba(100, 255, 218, 0.2)';
-        this.style.transform = 'scale(1.05)';
-        this.style.boxShadow = '0 0 20px rgba(100, 255, 218, 0.5)';
+    if (!navToggle || !navLinks) return;
+
+    // Mobile menu toggle
+    navToggle.addEventListener('click', toggleMobileMenu);
+
+    // Close mobile menu when clicking on nav links
+    navLinks.addEventListener('click', function(e) {
+        if (e.target.tagName === 'A') {
+            closeMobileMenu();
+        }
     });
-    
-    habilidad.addEventListener('mouseleave', function() {
-        this.style.background = 'rgba(100, 255, 218, 0.1)';
-        this.style.transform = 'scale(1)';
-        this.style.boxShadow = 'none';
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+            closeMobileMenu();
+        }
     });
-});
 
-// Funcionalidad para descargar CV en PDF (simulación)
-document.getElementById('downloadCv')?.addEventListener('click', function() {
-    // Mostrar efecto visual al hacer clic
-    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparando...';
-    
-    setTimeout(() => {
-        alert('Funcionalidad de descarga PDF. En una implementación real, esto generaría y descargaría tu CV en formato PDF.');
-        this.innerHTML = '<i class="fas fa-download"></i> Descargar CV';
-    }, 1500);
-});
+    // Handle escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeMobileMenu();
+        }
+    });
 
-// Función para manejar botones de compartir en redes sociales
-function compartirEnRedSocial(red) {
-    const url = window.location.href;
-    const title = 'Rubén D. Quispe - Systems Engineer & Data Analytics Specialist';
-    
-    let shareUrl = '';
-    
-    switch(red) {
-        case 'linkedin':
-            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}`;
-            break;
-        case 'twitter':
-            shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(title + ' ' + url)}`;
-            break;
-        case 'whatsapp':
-            shareUrl = `https://wa.me/?text=${encodeURIComponent(title + ' ' + url)}`;
-            break;
-        default:
-            return;
-    }
-    
-    window.open(shareUrl, '_blank', 'width=600,height=400');
+    // Smooth scrolling for navigation links
+    initializeSmoothScrolling();
 }
 
-// Agregar efecto de "ciber-destello" al hacer clic en cualquier parte
-document.addEventListener('click', function(e) {
-    const flash = document.createElement('div');
-    flash.style.cssText = `
-        position: fixed;
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        background: radial-gradient(circle, rgba(100,255,218,0.8) 0%, rgba(100,255,218,0) 70%);
-        left: ${e.clientX - 25}px;
-        top: ${e.clientY - 25}px;
-        pointer-events: none;
-        z-index: 9999;
-        animation: flash 0.6s ease-out forwards;
-    `;
-    
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes flash {
-            0% { transform: scale(0); opacity: 1; }
-            100% { transform: scale(2); opacity: 0; }
-        }
-    `;
-    document.head.appendChild(style);
-    
-    document.body.appendChild(flash);
-    
-    setTimeout(() => {
-        if (flash.parentNode) {
-            flash.parentNode.removeChild(flash);
-        }
-    }, 600);
-});
+function toggleMobileMenu() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
 
-// Función para alternar modo noche/día (demo)
-function toggleDarkMode() {
-    const body = document.body;
-    body.classList.toggle('dark-mode');
-    
-    // Agregar o quitar clase que invierte los colores
-    if (body.classList.contains('dark-mode')) {
-        document.documentElement.style.setProperty('--bg-primary', '#0f0c29');
-        document.documentElement.style.setProperty('--text-primary', '#e0e0e0');
+    const isOpen = navToggle.getAttribute('aria-expanded') === 'true';
+
+    navToggle.setAttribute('aria-expanded', !isOpen);
+    navLinks.classList.toggle('active');
+
+    // Prevent body scroll when menu is open
+    document.body.style.overflow = !isOpen ? 'hidden' : '';
+}
+
+function closeMobileMenu() {
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    navToggle.setAttribute('aria-expanded', 'false');
+    navLinks.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function initializeSmoothScrolling() {
+    const navLinks = document.querySelectorAll('a[href^="#"]');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+
+            if (targetElement) {
+                const headerOffset = 80; // Account for fixed header
+                const elementPosition = targetElement.offsetTop;
+                const offsetPosition = elementPosition - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+
+                // Update URL without jumping
+                history.pushState(null, null, targetId);
+            }
+        });
+    });
+}
+
+// ============================================
+// FORM VALIDATION
+// ============================================
+
+function initializeFormValidation() {
+    const contactForm = document.getElementById('contact-form');
+
+    if (!contactForm) return;
+
+    // Add event listeners for real-time validation
+    const inputs = contactForm.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('blur', () => validateField(input));
+        input.addEventListener('input', () => clearError(input));
+    });
+
+    // Handle form submission
+    contactForm.addEventListener('submit', handleFormSubmission);
+}
+
+function validateField(field) {
+    const value = field.value.trim();
+    const fieldName = field.name;
+    let isValid = true;
+    let errorMessage = '';
+
+    // Clear previous errors
+    clearError(field);
+
+    // Required field validation
+    if (!value) {
+        errorMessage = `${getFieldLabel(fieldName)} es requerido`;
+        isValid = false;
     } else {
-        document.documentElement.style.setProperty('--bg-primary', '#f8f9fa');
-        document.documentElement.style.setProperty('--text-primary', '#333');
-    }
-}
-
-// Inicializar tooltip personalizado
-function initTooltips() {
-    document.querySelectorAll('[data-tooltip]').forEach(el => {
-        let tooltip;
-        
-        const showTooltip = (e) => {
-            tooltip = document.createElement('div');
-            tooltip.className = 'custom-tooltip';
-            tooltip.textContent = el.getAttribute('data-tooltip');
-            tooltip.style.cssText = `
-                position: absolute;
-                background: rgba(0, 0, 0, 0.85);
-                color: #64ffda;
-                padding: 8px 15px;
-                border-radius: 6px;
-                font-size: 14px;
-                z-index: 10000;
-                pointer-events: none;
-                border: 1px solid rgba(100, 255, 218, 0.3);
-                backdrop-filter: blur(5px);
-                box-shadow: 0 0 15px rgba(100, 255, 218, 0.3);
-                white-space: nowrap;
-                animation: tooltipAppear 0.3s ease forwards;
-            `;
-            
-            // Posicionar tooltip
-            const rect = el.getBoundingClientRect();
-            tooltip.style.left = rect.left + window.scrollX + 'px';
-            tooltip.style.top = rect.top + window.scrollY - 40 + 'px';
-            
-            document.body.appendChild(tooltip);
-        };
-        
-        const hideTooltip = () => {
-            if (tooltip && tooltip.parentNode) {
-                tooltip.style.animation = 'tooltipDisappear 0.3s ease forwards';
-                setTimeout(() => {
-                    if (tooltip && tooltip.parentNode) {
-                        tooltip.parentNode.removeChild(tooltip);
-                    }
-                }, 300);
-            }
-        };
-        
-        // Agregar animaciones CSS
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes tooltipAppear {
-                from { opacity: 0; transform: translateY(10px); }
-                to { opacity: 1; transform: translateY(0); }
-            }
-            @keyframes tooltipDisappear {
-                from { opacity: 1; transform: translateY(0); }
-                to { opacity: 0; transform: translateY(10px); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        el.addEventListener('mouseenter', showTooltip);
-        el.addEventListener('mouseleave', hideTooltip);
-    });
-}
-
-// Ejecutar la inicialización de tooltips
-document.addEventListener('DOMContentLoaded', initTooltips);
-
-// Función para mostrar una alerta de notificación
-function showNotification(message, type = 'info') {
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.textContent = message;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        padding: 15px 25px;
-        border-radius: 8px;
-        color: white;
-        z-index: 10000;
-        background: ${type === 'success' ? 'rgba(46, 204, 113, 0.9)' : 
-                    type === 'error' ? 'rgba(231, 76, 60, 0.9)' : 
-                    'rgba(52, 152, 219, 0.9)'};
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        transform: translateX(120%);
-        transition: transform 0.4s ease;
-        font-weight: 500;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    // Animación de entrada
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 10);
-    
-    // Remover después de un tiempo
-    setTimeout(() => {
-        notification.style.transform = 'translateX(120%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 400);
-    }, 3000);
-}
-
-// Ejemplo de uso de notificación (podría ser llamado al cargar la página)
-// showNotification('¡Bienvenido a mi CV interactivo!', 'success');
-
-// Función para manejar el envío del formulario de contacto
-document.getElementById('contactForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    // Obtener los valores del formulario
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const asunto = document.getElementById('asunto').value;
-    const mensaje = document.getElementById('mensaje').value;
-    
-    // Validar que los campos no estén vacíos
-    if (!nombre || !email || !asunto || !mensaje) {
-        showNotification('Por favor, completa todos los campos', 'error');
-        return;
-    }
-    
-    // Validar formato de email
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-        showNotification('Por favor, ingresa un email válido', 'error');
-        return;
-    }
-    
-    // Simular envío del formulario
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalText = submitBtn.innerHTML;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-    submitBtn.disabled = true;
-    
-    // Simular proceso de envío
-    setTimeout(() => {
-        // En una implementación real, aquí enviarías los datos del formulario a través de AJAX o Fetch API
-        showNotification('¡Mensaje enviado exitosamente! Gracias por contactarme.', 'success');
-        
-        // Resetear el formulario
-        this.reset();
-        
-        // Restaurar el botón
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-    }, 2000);
-});
-
-// Función para generar código animado
-function generarCodigoAnimado() {
-    const codigoLines = [
-        "def analyze_data(dataset):",
-        "    insights = []",
-        "    for data in dataset:",
-        "        if data.pattern:",
-        "            insights.append(extract_insight(data))",
-        "    return insights",
-        "",
-        "class MachineLearningAgent:",
-        "    def __init__(self):",
-        "        self.model = self.train_model()",
-        "",
-        "    def predict(self, input_data):",
-        "        return self.model.predict(input_data)",
-        "",
-        "df = pd.read_csv('data.csv')",
-        "model = train_model(df)",
-        "predictions = model.predict(new_data)",
-        "",
-        "console.log('IA Agent initialized...');",
-        "const dataProcessor = new DataProcessor();",
-        "dataProcessor.analyze(realTimeData);",
-        "",
-        "{",
-        "  \"ai_agent\": \"active\",",
-        "  \"status\": \"processing\",",
-        "  \"data_streams\": 5,",
-        "  \"insights_generated\": 247",
-        "}",
-        "",
-        "// Algoritmo de análisis de datos",
-        "for (let i = 0; i < data.length; i++) {",
-        "  if (data[i].value > threshold) {",
-        "    triggerInsight(data[i]);",
-        "  }",
-        "}"
-    ];
-    
-    const codigoContainer = document.getElementById('codigoAnimado');
-    
-    // Crear 15 líneas de código animadas
-    for (let i = 0; i < 15; i++) {
-        const line = document.createElement('div');
-        line.className = 'codigo-linea';
-        line.textContent = codigoLines[Math.floor(Math.random() * codigoLines.length)];
-        line.style.animationDelay = `${Math.random() * 10}s`;
-        line.style.left = `${Math.random() * 100}%`;
-        codigoContainer.appendChild(line);
-    }
-}
-
-// Función para inicializar terminal interactiva
-function initTerminal() {
-    const terminal = document.getElementById('terminal');
-    const content = document.getElementById('terminalContent');
-    
-    // Mostrar terminal después de 5 segundos para sorpresa
-    setTimeout(() => {
-        terminal.style.display = 'block';
-        terminal.style.animation = 'fadeIn 1s ease';
-        
-        // Agregar efecto de parpadeo al cursor
-        setInterval(() => {
-            const lastLine = content.querySelector('.terminal-line:last-child');
-            if (lastLine) {
-                const output = lastLine.querySelector('.terminal-output');
-                if (output) {
-                    output.innerHTML = output.innerHTML.replace(/\|$/, '') + (output.innerHTML.endsWith('|') ? '' : '|');
+        // Specific field validations
+        switch (fieldName) {
+            case 'email':
+                if (!isValidEmail(value)) {
+                    errorMessage = 'Por favor ingresa un email válido';
+                    isValid = false;
                 }
-            }
-        }, 500);
+                break;
+            case 'name':
+                if (value.length < 2) {
+                    errorMessage = 'El nombre debe tener al menos 2 caracteres';
+                    isValid = false;
+                }
+                break;
+            case 'subject':
+                if (value.length < 5) {
+                    errorMessage = 'El asunto debe tener al menos 5 caracteres';
+                    isValid = false;
+                }
+                break;
+            case 'message':
+                if (value.length < 10) {
+                    errorMessage = 'El mensaje debe tener al menos 10 caracteres';
+                    isValid = false;
+                }
+                break;
+        }
+    }
+
+    if (!isValid) {
+        showError(field, errorMessage);
+    }
+
+    return isValid;
+}
+
+function showError(field, message) {
+    const formGroup = field.closest('.form-group');
+    const errorElement = formGroup.querySelector('.error-message');
+
+    formGroup.classList.add('error');
+    errorElement.textContent = message;
+
+    // Focus on field for accessibility
+    field.setAttribute('aria-invalid', 'true');
+    field.setAttribute('aria-describedby', errorElement.id);
+}
+
+function clearError(field) {
+    const formGroup = field.closest('.form-group');
+    const errorElement = formGroup.querySelector('.error-message');
+
+    formGroup.classList.remove('error');
+    errorElement.textContent = '';
+
+    field.removeAttribute('aria-invalid');
+    field.removeAttribute('aria-describedby');
+}
+
+function handleFormSubmission(e) {
+    e.preventDefault();
+
+    const form = e.target;
+    const inputs = form.querySelectorAll('input, textarea');
+    let isFormValid = true;
+
+    // Validate all fields
+    inputs.forEach(input => {
+        if (!validateField(input)) {
+            isFormValid = false;
+        }
+    });
+
+    if (isFormValid) {
+        submitForm(form);
+    } else {
+        // Focus on first error field
+        const firstError = form.querySelector('.form-group.error input, .form-group.error textarea');
+        if (firstError) {
+            firstError.focus();
+        }
+    }
+}
+
+async function submitForm(form) {
+    const submitBtn = form.querySelector('.submit-btn');
+    const btnText = submitBtn.querySelector('.btn-text');
+    const btnLoading = submitBtn.querySelector('.btn-loading');
+
+    // Show loading state
+    submitBtn.disabled = true;
+    btnText.style.display = 'none';
+    btnLoading.style.display = 'inline';
+
+    try {
+        // Simulate form submission (replace with actual endpoint)
+        await new Promise(resolve => setTimeout(resolve, 2000));
+
+        // Show success message
+        showFormMessage('¡Gracias! Tu mensaje ha sido enviado correctamente.', 'success');
+        form.reset();
+
+    } catch (error) {
+        // Show error message
+        showFormMessage('Ocurrió un error al enviar el mensaje. Por favor, intenta nuevamente.', 'error');
+    } finally {
+        // Reset button state
+        submitBtn.disabled = false;
+        btnText.style.display = 'inline';
+        btnLoading.style.display = 'none';
+    }
+}
+
+function showFormMessage(message, type) {
+    // Create or update message element
+    let messageEl = document.querySelector('.form-message');
+
+    if (!messageEl) {
+        messageEl = document.createElement('div');
+        messageEl.className = 'form-message';
+        document.querySelector('.contact-form').appendChild(messageEl);
+    }
+
+    messageEl.textContent = message;
+    messageEl.className = `form-message ${type}`;
+    messageEl.style.display = 'block';
+
+    // Auto-hide after 5 seconds
+    setTimeout(() => {
+        messageEl.style.display = 'none';
     }, 5000);
 }
 
-// Función para escribir en la terminal
-function escribirEnTerminal(texto, delay = 100) {
-    const content = document.getElementById('terminalContent');
-    const line = document.createElement('div');
-    line.className = 'terminal-line';
-    line.innerHTML = `<span class="terminal-prompt">user@ruben-quispe:~$</span> <span class="terminal-output">${texto}|</span>`;
-    content.appendChild(line);
-    content.scrollTop = content.scrollHeight;
+// Helper functions
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
 }
 
-// Función para ejecutar comandos simulados en la terminal
-function ejecutarComandoTerminal(comando) {
-    const content = document.getElementById('terminalContent');
-    const promptLine = document.createElement('div');
-    promptLine.className = 'terminal-line';
-    promptLine.innerHTML = `<span class="terminal-prompt">user@ruben-quispe:~$</span> <span class="terminal-output">${comando}</span>`;
-    content.appendChild(promptLine);
-    
-    // Simular procesamiento
-    setTimeout(() => {
-        let respuesta = '';
-        
-        switch(comando.toLowerCase()) {
-            case 'help':
-                respuesta = 'Comandos disponibles: about, skills, projects, experience, clear';
-                break;
-            case 'about':
-                respuesta = 'Rubén D. Quispe - Systems Engineer | Data Analytics Specialist';
-                break;
-            case 'skills':
-                respuesta = 'Python, JavaScript, SQL, Machine Learning, Data Analysis, AI Agents';
-                break;
-            case 'projects':
-                respuesta = '1. IEEE Computer Society UTP Website\n2. AR Project Creation\n3. Productivity Mobile App';
-                break;
-            case 'experience':
-                respuesta = 'NTT DATA Europe & Latam - Systems Engineer\nIEEE UTP Perú - Web Master Team';
-                break;
-            case 'clear':
-                content.innerHTML = '';
-                return;
-            default:
-                respuesta = `Comando no reconocido: ${comando}. Escribe 'help' para ver comandos disponibles.`;
-        }
-        
-        const outputLine = document.createElement('div');
-        outputLine.className = 'terminal-line';
-        outputLine.innerHTML = `<span class="terminal-output">${respuesta}</span>`;
-        content.appendChild(outputLine);
-        content.scrollTop = content.scrollHeight;
-    }, 500);
+function getFieldLabel(fieldName) {
+    const labels = {
+        name: 'Nombre',
+        email: 'Email',
+        subject: 'Asunto',
+        message: 'Mensaje'
+    };
+    return labels[fieldName] || fieldName;
 }
 
-// Función para alternar la visibilidad de la terminal
-function toggleTerminal() {
-    const terminal = document.getElementById('terminal');
-    if (terminal.style.display === 'none' || !terminal.style.display) {
-        terminal.style.display = 'block';
-        escribirEnTerminal('Terminal activada...', 0);
-    } else {
-        terminal.style.display = 'none';
-    }
-}
+// ============================================
+// SCROLL ANIMATIONS
+// ============================================
 
-// Función para inicializar efectos de IA y Data Science
-function initIAEffects() {
-    // Crear más elementos de gráficos animados para IA/Data Science
-    const iaContainer = document.querySelector('.ia-data-container');
-    const graficoTipos = [
-        '<i class="fas fa-project-diagram"></i>', // Gráfico de red
-        '<i class="fas fa-chart-line"></i>',     // Gráfico de línea
-        '<i class="fas fa-brain"></i>',          // Cerebro de IA
-        '<i class="fas fa-database"></i>',       // Base de datos
-        '<i class="fas fa-robot"></i>'           // Robot
-    ];
-    
-    for (let i = 0; i < 8; i++) {
-        const grafico = document.createElement('div');
-        grafico.className = 'grafico-animado';
-        grafico.style.top = `${Math.random() * 100}%`;
-        grafico.style.left = `${Math.random() * 100}%`;
-        grafico.style.animationDuration = `${15 + Math.random() * 15}s`;
-        grafico.innerHTML = graficoTipos[Math.floor(Math.random() * graficoTipos.length)];
-        grafico.style.fontSize = `${20 + Math.random() * 20}px`;
-        grafico.style.display = 'flex';
-        grafico.style.alignItems = 'center';
-        grafico.style.justifyContent = 'center';
-        grafico.style.color = '#64ffda';
-        iaContainer.appendChild(grafico);
-    }
-}
+function initializeScrollAnimations() {
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
 
-// Función para crear efecto de ondulación en habilidades
-function initHabilidadesWave() {
-    document.querySelectorAll('.habilidad-progreso').forEach((bar, index) => {
-        // Agregar efecto de ondulación al hacer hover
-        bar.addEventListener('mouseenter', () => {
-            const relleno = bar.querySelector('.relleno');
-            relleno.style.background = 'linear-gradient(90deg, #fc00ff, #00dbde, #fc00ff)';
-            relleno.style.backgroundSize = '200% 100%';
-            relleno.style.animation = 'wave 0.5s linear infinite';
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('fade-in-up');
+                observer.unobserve(entry.target);
+            }
         });
-        
-        bar.addEventListener('mouseleave', () => {
-            const relleno = bar.querySelector('.relleno');
-            relleno.style.background = 'linear-gradient(90deg, #00dbde, #fc00ff)';
-            relleno.style.backgroundSize = '100% 100%';
-            relleno.style.animation = 'shine 2s infinite';
+    }, observerOptions);
+
+    // Observe elements for animation
+    const animateElements = document.querySelectorAll(
+        '.project-card, .experience-item, .skill-category, .contact-item, .hero-content'
+    );
+
+    animateElements.forEach(el => {
+        observer.observe(el);
+    });
+
+    // Skill chip hover effects
+    initializeSkillChips();
+}
+
+function initializeSkillChips() {
+    const skillChips = document.querySelectorAll('.skill-chip');
+
+    skillChips.forEach(chip => {
+        chip.addEventListener('mouseenter', function() {
+            // Add subtle animation on hover
+            this.style.transform = 'translateY(-2px) scale(1.05)';
+        });
+
+        chip.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)';
         });
     });
-    
-    // Agregar animación CSS para el efecto de onda
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes wave {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+}
+
+// ============================================
+// ACCESSIBILITY ENHANCEMENTS
+// ============================================
+
+function initializeAccessibility() {
+    // Focus management
+    manageFocus();
+
+    // Keyboard navigation
+    enhanceKeyboardNavigation();
+
+    // ARIA live regions for dynamic content
+    createLiveRegions();
+
+    // High contrast mode detection
+    detectHighContrastMode();
+}
+
+function manageFocus() {
+    // Add focus-visible polyfill behavior
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            document.body.classList.add('using-keyboard');
         }
+    });
+
+    document.addEventListener('mousedown', function() {
+        document.body.classList.remove('using-keyboard');
+    });
+}
+
+function enhanceKeyboardNavigation() {
+    // Enhanced card navigation
+    const cards = document.querySelectorAll('.project-card, .experience-item');
+
+    cards.forEach(card => {
+        card.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                const link = this.querySelector('a');
+                if (link) {
+                    link.click();
+                }
+            }
+        });
+    });
+
+    // Skip to main content link
+    addSkipLink();
+}
+
+function addSkipLink() {
+    if (document.querySelector('.skip-link')) return;
+
+    const skipLink = document.createElement('a');
+    skipLink.href = '#content';
+    skipLink.textContent = 'Saltar al contenido principal';
+    skipLink.className = 'skip-link sr-only';
+    skipLink.style.cssText = `
+        position: fixed;
+        top: -40px;
+        left: 6px;
+        background: var(--primary-color);
+        color: white;
+        padding: 8px;
+        z-index: 10000;
+        border-radius: 4px;
+        transition: top 0.3s;
     `;
-    document.head.appendChild(style);
-}
 
-// Inicializar todas las funciones al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-    generarCodigoAnimado();
-    initTerminal();
-    initIAEffects();
-    initHabilidadesWave();
-    
-    // Agregar eventos para la terminal
-    document.addEventListener('keydown', function(e) {
-        if (e.key === '`') { // Usar la tecla ` para abrir/cerrar la terminal
-            toggleTerminal();
-        }
+    skipLink.addEventListener('focus', function() {
+        this.style.top = '6px';
+        this.classList.remove('sr-only');
     });
-    
-    // Comandos de terminal simulados
-    setTimeout(() => {
-        if (document.getElementById('terminal').style.display !== 'none') {
-            escribirEnTerminal('Sistema IA activado. Escribe "help" para comandos disponibles.', 0);
-        }
-    }, 6000);
-});
 
-// Agregar evento para detectar cuando se escribe en la terminal
-document.addEventListener('click', function(e) {
-    // Si se hace clic en la terminal, se puede agregar lógica de entrada aquí
-    if (e.target.closest('.terminal')) {
-        // Lógica para manejar la entrada de texto en la terminal
-    }
-});
-
-// Función para inicializar el flujo de datos
-function initDataFlow() {
-    const dataFlow = document.getElementById('dataFlow');
-    
-    // Crear nodos de datos
-    for (let i = 0; i < 20; i++) {
-        const node = document.createElement('div');
-        node.className = 'data-node';
-        node.style.left = `${Math.random() * 100}%`;
-        node.style.top = `${Math.random() * 100}%`;
-        node.style.animation = `pulseAnimation ${3 + Math.random() * 4}s infinite`;
-        dataFlow.appendChild(node);
-    }
-    
-    // Crear enlaces entre nodos
-    for (let i = 0; i < 10; i++) {
-        const link = document.createElement('div');
-        link.className = 'data-link';
-        const angle = Math.random() * 360;
-        const length = 50 + Math.random() * 100;
-        link.style.width = `${length}px`;
-        link.style.top = `${Math.random() * 100}%`;
-        link.style.left = `${Math.random() * 100}%`;
-        link.style.transform = `rotate(${angle}deg)`;
-        dataFlow.appendChild(link);
-    }
-}
-
-// Función para inicializar el asistente de IA
-function initAIAssistant() {
-    const aiAssistant = document.getElementById('aiAssistant');
-    
-    aiAssistant.addEventListener('click', function() {
-        this.classList.toggle('open');
+    skipLink.addEventListener('blur', function() {
+        this.style.top = '-40px';
+        this.classList.add('sr-only');
     });
+
+    document.body.insertBefore(skipLink, document.body.firstChild);
 }
 
-// Función para comandos del asistente de IA
-function aiAssistantCommand(comando) {
-    switch(comando) {
-        case 'skills':
-            showNotification('Mis habilidades principales: Python, JavaScript, SQL, Machine Learning, Data Analysis, IA Agents', 'success');
-            break;
-        case 'projects':
-            showNotification('Proyectos destacados: IEEE Computer Society UTP Website, AR Project Creation, Productivity Mobile App', 'success');
-            break;
-        case 'contact':
-            showNotification('Contáctame: ruben.quispev@gmail.com | +51 987 654 321', 'success');
-            break;
-        default:
-            showNotification('Comando no reconocido', 'error');
+function createLiveRegions() {
+    // Create ARIA live region for announcements
+    const liveRegion = document.createElement('div');
+    liveRegion.setAttribute('aria-live', 'polite');
+    liveRegion.setAttribute('aria-atomic', 'true');
+    liveRegion.className = 'sr-only';
+    liveRegion.id = 'live-region';
+    document.body.appendChild(liveRegion);
+}
+
+function announceToScreenReader(message) {
+    const liveRegion = document.getElementById('live-region');
+    if (liveRegion) {
+        liveRegion.textContent = message;
+        setTimeout(() => {
+            liveRegion.textContent = '';
+        }, 1000);
     }
 }
 
-// Función para manejar enlaces de contacto
-function initContactLinks() {
-    // Actualizar enlaces de contacto con información real
-    const emailLink = document.querySelector('a[data-email]');
-    const phoneLink = document.querySelector('a[data-phone]');
-    
-    if(emailLink) {
-        emailLink.addEventListener('click', function(e) {
-            showNotification('Copiado al portapapeles: ' + this.textContent, 'success');
-        });
+function detectHighContrastMode() {
+    // Detect Windows High Contrast Mode
+    if (window.matchMedia && window.matchMedia('(prefers-contrast: high)').matches) {
+        document.documentElement.classList.add('high-contrast');
     }
-    
-    if(phoneLink) {
-        phoneLink.addEventListener('click', function(e) {
-            showNotification('Marcando: ' + this.textContent, 'success');
+
+    // Listen for changes
+    if (window.matchMedia) {
+        const mediaQuery = window.matchMedia('(prefers-contrast: high)');
+        mediaQuery.addListener(function(mq) {
+            if (mq.matches) {
+                document.documentElement.classList.add('high-contrast');
+            } else {
+                document.documentElement.classList.remove('high-contrast');
+            }
         });
     }
 }
 
-// Función para inicializar el control de tema
-function initThemeToggle() {
-    const themeToggle = document.getElementById('themeToggle');
-    let isDarkMode = false;
-    
-    themeToggle.addEventListener('click', function() {
-        isDarkMode = !isDarkMode;
-        this.classList.toggle('dark', isDarkMode);
-        
-        if (isDarkMode) {
-            document.body.style.background = 'linear-gradient(45deg, #0f0c29, #302b63, #24243e)';
-            showNotification('Modo IA activado', 'success');
-        } else {
-            document.body.style.background = 'linear-gradient(45deg, #0f0c29, #302b63, #24243e)';
-            showNotification('Modo normal activado', 'success');
-        }
-    });
+// ============================================
+// PERFORMANCE OPTIMIZATIONS
+// ============================================
+
+// Lazy loading images
+function initializeLazyLoading() {
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.remove('lazy');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    }
 }
 
-// Función para inicializar la timeline interactiva
-function initTimeline() {
-    // Esta función se puede expandir para crear una línea de tiempo animada
-    // con las experiencias y educación
-    document.querySelectorAll('.experiencia-item, .educacion-item').forEach((item, index) => {
-        item.style.animationDelay = `${index * 0.2}s`;
-    });
+// Debounce utility
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function executedFunction() {
+        const context = this;
+        const args = arguments;
+        const later = function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
 }
 
-// Función para inicializar microinteracciones
-function initMicroInteractions() {
-    // Agregar efectos de microinteracción a elementos específicos
-    document.querySelectorAll('.experiencia-item, .educacion-item, .certificacion-item, .voluntariado-item, .proyecto-item').forEach(item => {
-        item.classList.add('micro-interaccion');
-    });
+// Throttle utility
+function throttle(func, limit) {
+    let inThrottle;
+    return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+            func.apply(context, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    }
 }
 
-// Inicializar todas las funciones al cargar la página
-document.addEventListener('DOMContentLoaded', function() {
-    generarCodigoAnimado();
-    initTerminal();
-    initIAEffects();
-    initHabilidadesWave();
-    initDataFlow();
-    initAIAssistant();
-    initThemeToggle();
-    initTimeline();
-    initMicroInteractions();
-    initContactLinks();
-    
-    // Agregar eventos para la terminal
-    document.addEventListener('keydown', function(e) {
-        if (e.key === '`') { // Usar la tecla ` para abrir/cerrar la terminal
-            toggleTerminal();
+// ============================================
+// LEGACY COMPATIBILITY
+// ============================================
+
+// Keep some legacy functionality for smooth transition
+const terminal = document.getElementById('terminal');
+const aiAssistant = document.getElementById('aiAssistant');
+
+// Legacy terminal toggle
+function toggleTerminal() {
+    if (terminal) {
+        terminal.style.display = terminal.style.display === 'none' ? 'block' : 'none';
+    }
+}
+
+// Legacy AI assistant commands
+function aiAssistantCommand(command) {
+    const responses = {
+        skills: 'Mis principales habilidades incluyen Python, SQL, análisis de datos y machine learning.',
+        projects: 'He trabajado en proyectos de análisis de datos, desarrollo web y realidad aumentada.',
+        contact: 'Puedes contactarme en ruben.quispev@gmail.com o a través de LinkedIn.'
+    };
+
+    if (aiAssistant && responses[command]) {
+        const content = aiAssistant.querySelector('#aiAssistantContent p');
+        if (content) {
+            content.textContent = responses[command];
         }
-    });
-    
-    // Comandos de terminal simulados
-    setTimeout(() => {
-        if (document.getElementById('terminal') && document.getElementById('terminal').style.display !== 'none') {
-            escribirEnTerminal('Sistema IA activado. Escribe "help" para comandos disponibles.', 0);
-        }
-    }, 6000);
+    }
+}
+
+// Make functions globally available for legacy HTML
+window.toggleTerminal = toggleTerminal;
+window.aiAssistantCommand = aiAssistantCommand;
+
+// ============================================
+// ERROR HANDLING
+// ============================================
+
+// Global error handler
+window.addEventListener('error', function(e) {
+    console.error('Global error:', e.error);
+    // Could send to analytics service here
 });
+
+// Promise rejection handler
+window.addEventListener('unhandledrejection', function(e) {
+    console.error('Unhandled promise rejection:', e.reason);
+    // Could send to analytics service here
+});
+
+// Export for testing (if using modules)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        validateField,
+        isValidEmail,
+        toggleMobileMenu,
+        closeMobileMenu
+    };
+}
