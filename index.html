@@ -12,13 +12,16 @@
     <!-- Contenedor de código animado -->
     <div class="codigo-animado" id="codigoAnimado"></div>
     
+    <!-- Efectos de flujo de datos -->
+    <div class="data-flow" id="dataFlow"></div>
+    
     <!-- Efectos de IA y Data Science -->
-    <div class="ia-data-container">
-        <div class="grafico-animado"></div>
-        <div class="grafico-animado"></div>
-        <div class="grafico-animado"></div>
-        <div class="grafico-animado"></div>
-        <div class="grafico-animado"></div>
+    <div class="ia-data-container" id="iaDataContainer">
+        <div class="grafico-animado"><i class="fas fa-project-diagram"></i></div>
+        <div class="grafico-animado"><i class="fas fa-chart-line"></i></div>
+        <div class="grafico-animado"><i class="fas fa-brain"></i></div>
+        <div class="grafico-animado"><i class="fas fa-database"></i></div>
+        <div class="grafico-animado"><i class="fas fa-robot"></i></div>
     </div>
     
     <!-- Terminal animada -->
@@ -35,6 +38,19 @@
             <!-- Contenido dinámico de la terminal -->
         </div>
     </div>
+    
+    <!-- Asistente de IA -->
+    <div class="ai-assistant" id="aiAssistant">
+        <i class="fas fa-robot"></i>
+        <div class="ai-assistant-content" id="aiAssistantContent">
+            <p>¡Hola! Soy tu asistente de IA. Puedo ayudarte a navegar por mi CV o responder preguntas sobre mi experiencia.</p>
+            <button onclick="aiAssistantCommand('skills')" class="badge">Ver Habilidades</button>
+            <button onclick="aiAssistantCommand('projects')" class="badge">Ver Proyectos</button>
+        </div>
+    </div>
+    
+    <!-- Control de tema -->
+    <div class="theme-toggle" id="themeToggle"></div>
 
     <!-- Header/Inicio -->
     <header id="inicio" class="header">
@@ -201,49 +217,89 @@
                 <div class="categorias-habilidades">
                     <div class="categoria">
                         <h3>Tecnologías</h3>
-                        <ul>
-                            <li><span class="habilidad">Data Recovery</span></li>
-                            <li><span class="habilidad">Database Development</span></li>
-                            <li><span class="habilidad">Application Development</span></li>
-                            <li><span class="habilidad">Business Analytics</span></li>
-                            <li><span class="habilidad">Data Reporting</span></li>
-                            <li><span class="habilidad">IT Consulting</span></li>
-                        </ul>
+                        <div class="habilidades-badges">
+                            <span class="badge">Data Recovery</span>
+                            <span class="badge">Database Development</span>
+                            <span class="badge">Application Development</span>
+                            <span class="badge">Business Analytics</span>
+                            <span class="badge">Data Reporting</span>
+                            <span class="badge">IT Consulting</span>
+                        </div>
                     </div>
                     
                     <div class="categoria">
                         <h3>Habilidades Técnicas</h3>
-                        <div class="habilidad-progreso">
-                            <p>Desarrollo Web <span>80%</span></p>
-                            <div class="barra-progreso">
-                                <div class="relleno" style="width: 80%"></div>
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 490;"
+                                        stroke-dasharray="490 490"
+                                        stroke-dashoffset="122.5"></circle>
+                                </svg>
+                                <div class="texto">80%</div>
                             </div>
+                            <div class="grafico-label">Desarrollo Web</div>
                         </div>
                         
-                        <div class="habilidad-progreso">
-                            <p>Machine Learning <span>70%</span></p>
-                            <div class="barra-progreso">
-                                <div class="relleno" style="width: 70%"></div>
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 418;"
+                                        stroke-dasharray="418 490"
+                                        stroke-dashoffset="145.5"></circle>
+                                </svg>
+                                <div class="texto">70%</div>
                             </div>
+                            <div class="grafico-label">Machine Learning</div>
                         </div>
                         
-                        <div class="habilidad-progreso">
-                            <p>Análisis de Datos <span>85%</span></p>
-                            <div class="barra-progreso">
-                                <div class="relleno" style="width: 85%"></div>
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 490;"
+                                        stroke-dasharray="416.5 490"
+                                        stroke-dashoffset="73.5"></circle>
+                                </svg>
+                                <div class="texto">85%</div>
                             </div>
+                                <div class="grafico-label">Análisis de Datos</div>
                         </div>
                         
-                        <div class="habilidad-progreso">
-                            <p>Bases de Datos <span>75%</span></p>
-                            <div class="barra-progreso">
-                                <div class="relleno" style="width: 75%"></div>
+                        <div class="habilidades-graficos">
+                            <div class="grafico-circular">
+                                <svg width="120" height="120">
+                                    <circle class="fondo" cx="60" cy="60" r="54"></circle>
+                                    <circle class="valor" cx="60" cy="60" r="54" 
+                                        stroke="url(#gradient)" 
+                                        style="--circunferencia: 490;"
+                                        stroke-dasharray="367.5 490"
+                                        stroke-dashoffset="122.5"></circle>
+                                </svg>
+                                <div class="texto">75%</div>
                             </div>
+                            <div class="grafico-label">Bases de Datos</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <svg style="display: none;">
+            <defs>
+                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#00dbde" />
+                    <stop offset="100%" stop-color="#fc00ff" />
+                </linearGradient>
+            </defs>
+        </svg>
     </section>
 
     <!-- Sección Certificaciones -->

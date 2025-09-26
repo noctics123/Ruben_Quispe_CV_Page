@@ -727,3 +727,117 @@ document.addEventListener('click', function(e) {
         // Lógica para manejar la entrada de texto en la terminal
     }
 });
+
+// Función para inicializar el flujo de datos
+function initDataFlow() {
+    const dataFlow = document.getElementById('dataFlow');
+    
+    // Crear nodos de datos
+    for (let i = 0; i < 20; i++) {
+        const node = document.createElement('div');
+        node.className = 'data-node';
+        node.style.left = `${Math.random() * 100}%`;
+        node.style.top = `${Math.random() * 100}%`;
+        node.style.animation = `pulseAnimation ${3 + Math.random() * 4}s infinite`;
+        dataFlow.appendChild(node);
+    }
+    
+    // Crear enlaces entre nodos
+    for (let i = 0; i < 10; i++) {
+        const link = document.createElement('div');
+        link.className = 'data-link';
+        const angle = Math.random() * 360;
+        const length = 50 + Math.random() * 100;
+        link.style.width = `${length}px`;
+        link.style.top = `${Math.random() * 100}%`;
+        link.style.left = `${Math.random() * 100}%`;
+        link.style.transform = `rotate(${angle}deg)`;
+        dataFlow.appendChild(link);
+    }
+}
+
+// Función para inicializar el asistente de IA
+function initAIAssistant() {
+    const aiAssistant = document.getElementById('aiAssistant');
+    
+    aiAssistant.addEventListener('click', function() {
+        this.classList.toggle('open');
+    });
+}
+
+// Función para comandos del asistente de IA
+function aiAssistantCommand(comando) {
+    switch(comando) {
+        case 'skills':
+            showNotification('Mis habilidades principales: Python, JavaScript, SQL, Machine Learning, Data Analysis, IA Agents', 'success');
+            break;
+        case 'projects':
+            showNotification('Proyectos destacados: IEEE Computer Society UTP Website, AR Project Creation, Productivity Mobile App', 'success');
+            break;
+        default:
+            showNotification('Comando no reconocido', 'error');
+    }
+}
+
+// Función para inicializar el control de tema
+function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    let isDarkMode = false;
+    
+    themeToggle.addEventListener('click', function() {
+        isDarkMode = !isDarkMode;
+        this.classList.toggle('dark', isDarkMode);
+        
+        if (isDarkMode) {
+            document.body.style.background = 'linear-gradient(45deg, #0f0c29, #302b63, #24243e)';
+            showNotification('Modo IA activado', 'success');
+        } else {
+            document.body.style.background = 'linear-gradient(45deg, #0f0c29, #302b63, #24243e)';
+            showNotification('Modo normal activado', 'success');
+        }
+    });
+}
+
+// Función para inicializar la timeline interactiva
+function initTimeline() {
+    // Esta función se puede expandir para crear una línea de tiempo animada
+    // con las experiencias y educación
+    document.querySelectorAll('.experiencia-item, .educacion-item').forEach((item, index) => {
+        item.style.animationDelay = `${index * 0.2}s`;
+    });
+}
+
+// Función para inicializar microinteracciones
+function initMicroInteractions() {
+    // Agregar efectos de microinteracción a elementos específicos
+    document.querySelectorAll('.experiencia-item, .educacion-item, .certificacion-item, .voluntariado-item, .proyecto-item').forEach(item => {
+        item.classList.add('micro-interaccion');
+    });
+}
+
+// Inicializar todas las funciones al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    generarCodigoAnimado();
+    initTerminal();
+    initIAEffects();
+    initHabilidadesWave();
+    initDataFlow();
+    initAIAssistant();
+    initThemeToggle();
+    initTimeline();
+    initMicroInteractions();
+    
+    // Agregar eventos para la terminal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === '`') { // Usar la tecla ` para abrir/cerrar la terminal
+            toggleTerminal();
+        }
+    });
+    
+    // Comandos de terminal simulados
+    setTimeout(() => {
+        if (document.getElementById('terminal') && document.getElementById('terminal').style.display !== 'none') {
+            escribirEnTerminal('Sistema IA activado. Escribe "help" para comandos disponibles.', 0);
+        }
+    }, 6000);
+});

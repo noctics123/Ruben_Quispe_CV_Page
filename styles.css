@@ -143,6 +143,48 @@ body {
     color: #a0a0ff;
 }
 
+/* Efecto de flujo de datos entre secciones */
+.data-flow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.data-node {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #64ffda;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(100, 255, 218, 0.7);
+}
+
+.data-link {
+    position: absolute;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(100, 255, 218, 0.5), transparent);
+    transform-origin: left;
+}
+
+.data-pulse {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: rgba(100, 255, 218, 0.7);
+    border-radius: 50%;
+    animation: pulseAnimation 2s infinite;
+}
+
+@keyframes pulseAnimation {
+    0% { transform: scale(0.5); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
 /* Efectos de IA y Data Science */
 .ia-data-container {
     position: fixed;
@@ -199,6 +241,228 @@ body {
 .grafico-animado:nth-child(3) { bottom: 30%; left: 25%; animation-duration: 22s; }
 .grafico-animado:nth-child(4) { bottom: 15%; right: 35%; animation-duration: 25s; }
 .grafico-animado:nth-child(5) { top: 40%; left: 60%; animation-duration: 15s; }
+
+/* Asistente de IA flotante */
+.ai-assistant {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #00dbde, #fc00ff);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.4);
+    transition: all 0.3s ease;
+    animation: float 3s ease-in-out infinite;
+}
+
+.ai-assistant:hover {
+    transform: scale(1.1) rotate(10deg);
+    box-shadow: 0 8px 25px rgba(100, 255, 218, 0.6);
+}
+
+.ai-assistant.open {
+    width: 300px;
+    height: auto;
+    border-radius: 20px;
+    padding: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.ai-assistant-content {
+    display: none;
+    margin-top: 15px;
+    color: white;
+    font-size: 14px;
+    max-width: 240px;
+}
+
+.ai-assistant.open .ai-assistant-content {
+    display: block;
+}
+
+.ai-assistant.open i {
+    transform: rotate(180deg);
+}
+
+/* Microinteracciones */
+.micro-interaccion {
+    transition: all 0.3s ease;
+}
+
+.micro-interaccion:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(100, 255, 218, 0.2);
+}
+
+/* Gráficos circulares de habilidades */
+.grafico-circular {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 20px auto;
+}
+
+.grafico-circular .fondo {
+    fill: none;
+    stroke: rgba(100, 255, 218, 0.1);
+    stroke-width: 10;
+}
+
+.grafico-circular .valor {
+    fill: none;
+    stroke-width: 10;
+    stroke-linecap: round;
+    animation: cargarGrafico 2s ease-in-out;
+}
+
+@keyframes cargarGrafico {
+    0% { stroke-dasharray: 0 360; }
+    100% { stroke-dasharray: var(--circunferencia) 360; }
+}
+
+.grafico-circular .texto {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #64ffda;
+}
+
+/* Timeline interactiva */
+.timeline {
+    position: relative;
+    padding: 20px 0;
+    margin: 40px 0;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(to bottom, #00dbde, #fc00ff);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    position: relative;
+    width: calc(50% - 40px);
+    margin-bottom: 40px;
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+.timeline-item:nth-child(even) {
+    margin-left: 50%;
+}
+
+.timeline-item:nth-child(odd) {
+    margin-left: 0;
+}
+
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #64ffda;
+    box-shadow: 0 0 0 4px rgba(100, 255, 218, 0.3);
+    top: 0;
+}
+
+.timeline-item:nth-child(even)::after {
+    right: -50px;
+    top: 0;
+}
+
+.timeline-item:nth-child(odd)::after {
+    left: calc(100% + 40px);
+    top: 0;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Badges o logros */
+.badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 20px;
+    background: rgba(100, 255, 218, 0.1);
+    color: #64ffda;
+    border: 1px solid rgba(100, 255, 218, 0.3);
+    margin: 5px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.badge:hover {
+    background: rgba(100, 255, 218, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(100, 255, 218, 0.3);
+}
+
+/* Controles de tema */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 50px;
+    height: 26px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 13px;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    padding: 0 2px;
+}
+
+.theme-toggle.active {
+    justify-content: flex-end;
+    background: linear-gradient(90deg, #00dbde, #fc00ff);
+}
+
+.theme-toggle::before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle.dark {
+    background: linear-gradient(90deg, #ff00cc, #333399);
+}
 
 .container {
     max-width: 1200px;
