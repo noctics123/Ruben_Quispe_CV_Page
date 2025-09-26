@@ -1118,3 +1118,134 @@ a:hover, a:focus {
     border: 1px solid #000;
   }
 }
+
+/* =========================
+   Phase 1 alignment styles
+   ========================= */
+
+/* Support current HTML nav container */
+.main-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+/* Mobile menu button lines used by current HTML */
+.nav-toggle-line {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: var(--text-primary);
+  margin: 4px 0;
+  transition: var(--transition);
+}
+
+.nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(2) {
+  opacity: 0;
+}
+.nav-toggle[aria-expanded="true"] .nav-toggle-line:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+/* Prevent background scroll when mobile nav is open */
+body.nav-open { overflow: hidden; }
+
+/* Generic building blocks matching HTML */
+.section { padding: var(--section-padding); }
+.section-alt { background: var(--surface); }
+.section-header { text-align: center; margin-bottom: var(--space-2xl); }
+.section-title { margin-bottom: var(--space-sm); }
+
+.card {
+  background: var(--surface-elevated);
+  border-radius: var(--border-radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* Brand area in header */
+.nav-brand { display: flex; align-items: center; gap: var(--space-md); }
+.nav-avatar { border-radius: 50%; object-fit: cover; }
+.nav-brand-name { font-weight: 700; }
+.nav-brand-title { color: var(--text-secondary); font-size: 0.875rem; }
+
+/* Hero extras used in HTML */
+.hero-badge { display: inline-flex; align-items: center; gap: .5rem; padding: .375rem .75rem; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; color: var(--text-secondary); margin-bottom: var(--space-md); }
+.hero-stats { display: flex; gap: var(--space-xl); margin: var(--space-lg) 0; flex-wrap: wrap; }
+.stat { display: flex; flex-direction: column; align-items: flex-start; }
+.stat-number { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+.stat-label { color: var(--text-secondary); font-size: .875rem; }
+
+/* Align hero image classes with existing design */
+.hero-image-container { position: relative; }
+.hero-image { width: 200px; height: 200px; border-radius: 50%; object-fit: cover; border: 4px solid var(--primary-color); box-shadow: 0 10px 25px rgba(37,99,235,.2); }
+@media (max-width: 768px) { .hero-image { width: 150px; height: 150px; } }
+.hero-image-decoration { position: absolute; inset: -8px; border-radius: 50%; border: 2px dashed rgba(37,99,235,.25); pointer-events: none; }
+
+/* Active nav link */
+.nav-link--active { color: var(--primary-color); }
+
+/* =========================
+   Phase 2 UI components
+   ========================= */
+
+/* Audience toggle */
+.audience-toggle { display: inline-flex; gap: .25rem; padding: .25rem; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; margin: 0 0 var(--space-md) 0; }
+.toggle-option { border: none; background: transparent; padding: .375rem .75rem; border-radius: 999px; cursor: pointer; color: var(--text-secondary); font-weight: 500; }
+.toggle-option.active { background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: #fff; }
+
+/* Audience content visibility */
+body[data-audience="clientes"] .for-recruiters { display: none !important; }
+body[data-audience="reclutadores"] .for-clients { display: none !important; }
+
+/* Social proof logos */
+.logo-row { display: flex; gap: var(--space-xl); align-items: center; flex-wrap: wrap; margin-top: var(--space-xl); color: var(--text-secondary); }
+.logo-item { display: inline-flex; align-items: center; gap: .5rem; opacity: .85; }
+.logo-item i { font-size: 1.25rem; }
+
+/* Framework grid */
+.framework-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--space-xl); margin-top: var(--space-2xl); }
+.framework-step { padding: var(--space-xl); position: relative; }
+.step-number { position: absolute; top: var(--space-lg); right: var(--space-lg); width: 2rem; height: 2rem; border-radius: 50%; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--border); color: var(--primary-color); font-weight: 700; }
+.step-title { margin-bottom: var(--space-sm); }
+.step-text { color: var(--text-secondary); }
+
+/* Project case details */
+.project-description p { margin: 0 0 .5rem 0; }
+.project-problem strong, .project-solution strong, .project-result strong { color: var(--text-primary); }
+
+/* Testimonials */
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-xl); margin-top: var(--space-2xl); }
+.testimonial-card { padding: var(--space-xl); }
+.testimonial-quote { font-size: 1.125rem; color: var(--text-primary); margin-bottom: var(--space-md); }
+.testimonial-meta { color: var(--text-secondary); font-size: .95rem; display: flex; gap: .5rem; }
+.testimonial-meta .author { font-weight: 600; }
+
+/* Skill bars used by HTML/JS */
+.skill-bar { width: 100%; height: 8px; background: var(--border-light); border-radius: 999px; overflow: hidden; }
+.skill-progress { height: 100%; background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); border-radius: 999px; width: 0%; }
+
+/* Timeline aliases for current markup */
+.timeline { position: relative; max-width: 900px; margin: var(--space-3xl) auto 0; }
+.timeline::before { content: ''; position: absolute; left: 1rem; top: 0; bottom: 0; width: 2px; background: var(--border); }
+.timeline-item { position: relative; padding: 0 0 var(--space-2xl) 3rem; }
+.timeline-marker { position: absolute; left: .75rem; top: .5rem; width: .75rem; height: .75rem; background: var(--primary-color); border-radius: 50%; box-shadow: 0 0 0 3px var(--surface); }
+.timeline-content { background: var(--surface-elevated); border: 1px solid var(--border); border-radius: var(--border-radius); padding: var(--space-xl); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+.timeline-header h3 { margin: 0 0 var(--space-xs) 0; }
+.timeline-company { color: var(--primary-color); font-weight: 500; }
+.timeline-period { color: var(--text-light); font-size: .875rem; }
+
+@media (max-width: 768px) {
+  /* Ensure JS 'nav-links--open' also works (backwards-compat) */
+  .nav-links.nav-links--open { transform: translateY(0); opacity: 1; visibility: visible; }
+
+  .timeline::before { left: .5rem; }
+  .timeline-item { padding-left: 2rem; }
+  .timeline-marker { left: .125rem; }
+}

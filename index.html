@@ -9,11 +9,11 @@
     <meta property="og:description" content="Transformo datos en decisiones con impacto medible">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://noctics123.github.io/Ruben_Quispe_CV_Page/">
-    <meta property="og:image" content="https://noctics123.github.io/Ruben_Quispe_CV_Page/ruben foto.jpeg">
+    <meta property="og:image" content="https://noctics123.github.io/Ruben_Quispe_CV_Page/ruben-quispe.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Rubén D. Quispe - Ingeniero de Datos">
     <meta name="twitter:description" content="Transformo datos en decisiones con impacto medible">
-    <meta name="twitter:image" content="https://noctics123.github.io/Ruben_Quispe_CV_Page/ruben foto.jpeg">
+    <meta name="twitter:image" content="https://noctics123.github.io/Ruben_Quispe_CV_Page/ruben-quispe.jpg">
 
     <!-- Additional SEO -->
     <meta name="keywords" content="ingeniero datos, data engineer, python, sql, analytics, machine learning, business intelligence, lima peru">
@@ -27,7 +27,7 @@
     <!-- Performance optimizations -->
     <link rel="dns-prefetch" href="//fonts.googleapis.com">
     <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
-    <link rel="preload" href="./ruben foto.jpeg" as="image">
+    <link rel="preload" href="./ruben-quispe.webp" as="image" type="image/webp">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -43,13 +43,13 @@
         "jobTitle": "Ingeniero de Datos",
         "description": "Especialista en análisis de datos y transformación digital",
         "url": "https://noctics123.github.io/Ruben_Quispe_CV_Page/",
-        "image": "https://noctics123.github.io/Ruben_Quispe_CV_Page/ruben foto.jpeg",
+        "image": "https://noctics123.github.io/Ruben_Quispe_CV_Page/ruben-quispe.jpg",
         "email": "ruben.quispev@gmail.com",
         "telephone": "+51 987 654 321",
         "address": {
             "@type": "PostalAddress",
             "addressLocality": "Lima",
-            "@country": "PE"
+            "addressCountry": "PE"
         },
         "sameAs": [
             "https://www.linkedin.com/in/rubenquispev/",
@@ -70,7 +70,7 @@
     }
     </script>
 </head>
-<body class="no-js">
+<body class="no-js" data-audience="clientes">
     <script>document.body.classList.remove('no-js'); document.body.classList.add('js');</script>
     <noscript>
         <style>
@@ -88,7 +88,10 @@
         <div class="container">
             <nav class="main-nav" role="navigation" aria-label="Navegación principal">
                 <div class="nav-brand">
-                    <img src="./ruben foto.jpeg" alt="Rubén D. Quispe" class="nav-avatar" width="40" height="40" loading="eager">
+                    <picture>
+                        <source srcset="./ruben-quispe.webp" type="image/webp">
+                        <img src="./ruben-quispe.jpg" alt="Rubén D. Quispe" class="nav-avatar" width="40" height="40" loading="eager">
+                    </picture>
                     <div class="nav-brand-text">
                         <span class="nav-brand-name">Rubén D. Quispe</span>
                         <span class="nav-brand-title">Data Engineer</span>
@@ -102,6 +105,7 @@
                 <ul class="nav-links" id="nav-menu" role="menu">
                     <li role="menuitem"><a href="#hero" class="nav-link" data-section="hero">Inicio</a></li>
                     <li role="menuitem"><a href="#about" class="nav-link" data-section="about">Sobre mí</a></li>
+                    <li role="menuitem"><a href="#framework" class="nav-link" data-section="framework">Marco</a></li>
                     <li role="menuitem"><a href="#experience" class="nav-link" data-section="experience">Experiencia</a></li>
                     <li role="menuitem"><a href="#projects" class="nav-link" data-section="projects">Proyectos</a></li>
                     <li role="menuitem"><a href="#skills" class="nav-link" data-section="skills">Habilidades</a></li>
@@ -122,10 +126,16 @@
                             <i class="fas fa-chart-line" aria-hidden="true"></i>
                             <span>Disponible para nuevos proyectos</span>
                         </div>
-                        <h1 id="hero-title">Transformo datos en decisiones</h1>
-                        <p class="hero-subtitle">
-                            Ingeniero de Sistemas especializado en <strong>análisis de datos</strong> y <strong>transformación digital</strong>.
-                            Ayudo a organizaciones a tomar decisiones basadas en datos con impacto medible.
+                        <div class="audience-toggle" role="tablist" aria-label="Audiencia">
+                            <button class="toggle-option active" role="tab" aria-selected="true" data-audience="clientes">Clientes</button>
+                            <button class="toggle-option" role="tab" aria-selected="false" data-audience="reclutadores">Reclutadores</button>
+                        </div>
+                        <h1 id="hero-title">Lidero plataformas de datos que convierten caos en crecimiento</h1>
+                        <p class="hero-subtitle for-clients" data-audience-target="clientes">
+                            Conecto <strong>estrategia</strong> con <strong>ingeniería</strong> para acelerar decisiones, reducir costos y crear ventajas competitivas.
+                        </p>
+                        <p class="hero-subtitle for-recruiters" data-audience-target="reclutadores">
+                            Ingeniero de Datos con foco en <strong>impacto medible</strong>: pipelines escalables, analytics accionable y productos de datos.
                         </p>
                         <div class="hero-stats">
                             <div class="stat">
@@ -142,23 +152,68 @@
                             </div>
                         </div>
                         <div class="hero-actions">
-                            <a href="#contact" class="btn btn-primary">
+                            <a href="mailto:ruben.quispev@gmail.com?subject=Agenda%2015%20min%3A%20Conversaci%C3%B3n%20de%20datos&body=Hola%20Rub%C3%A9n%2C%20me%20gustar%C3%ADa%20agendar%20una%20reuni%C3%B3n%20de%2015%20min%20para%20hablar%20sobre..." class="btn primary for-clients" data-audience-target="clientes">
                                 <i class="fas fa-envelope" aria-hidden="true"></i>
-                                Trabajemos juntos
+                                Agendar 15 min
                             </a>
-                            <a href="./Profile.pdf" class="btn btn-secondary" download>
+                            <a href="./Profile.pdf" class="btn ghost for-clients" data-audience-target="clientes" download>
                                 <i class="fas fa-download" aria-hidden="true"></i>
+                                One‑pager
+                            </a>
+                            <a href="./Profile.pdf" class="btn primary for-recruiters" data-audience-target="reclutadores" download>
+                                <i class="fas fa-file" aria-hidden="true"></i>
                                 Descargar CV
                             </a>
+                        </div>
+                        <div class="logo-row" aria-label="Confían en enfoques similares">
+                            <div class="logo-item"><i class="fab fa-aws" aria-hidden="true"></i><span>AWS</span></div>
+                            <div class="logo-item"><i class="fab fa-docker" aria-hidden="true"></i><span>Docker</span></div>
+                            <div class="logo-item"><i class="fab fa-python" aria-hidden="true"></i><span>Python</span></div>
+                            <div class="logo-item"><i class="fas fa-database" aria-hidden="true"></i><span>SQL</span></div>
                         </div>
                     </div>
                     <div class="hero-visual">
                         <div class="hero-image-container">
-                            <img src="./ruben foto.jpeg" alt="Rubén D. Quispe - Ingeniero de Datos"
-                                 class="hero-image" width="400" height="400" loading="eager">
+                            <picture>
+                                <source srcset="./ruben-quispe.webp" type="image/webp">
+                                <img src="./ruben-quispe.jpg" alt="Rubén D. Quispe - Ingeniero de Datos"
+                                     class="hero-image" width="400" height="400" loading="eager">
+                            </picture>
                             <div class="hero-image-decoration" aria-hidden="true"></div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Framework Section -->
+        <section id="framework" class="section section-alt" aria-labelledby="framework-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" id="framework-title">Marco de Valor de Datos</h2>
+                    <p class="section-subtitle">Mi enfoque probado para pasar de datos a resultados</p>
+                </div>
+                <div class="framework-grid">
+                    <article class="framework-step card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Data Strategy</h3>
+                        <p class="step-text">Defino objetivos de negocio, KPIs y fuentes. Alineo la hoja de ruta de datos con el P&L.</p>
+                    </article>
+                    <article class="framework-step card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Data Platform</h3>
+                        <p class="step-text">Arquitecturas escalables (ingesta, modelado, calidad, gobernanza) en AWS/Spark/SQL.</p>
+                    </article>
+                    <article class="framework-step card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Analytics Products</h3>
+                        <p class="step-text">Dashboards, APIs y modelos ML que resuelven casos críticos con UX clara.</p>
+                    </article>
+                    <article class="framework-step card">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Value Ops</h3>
+                        <p class="step-text">SLAs, observabilidad y mejora continua para sostener el impacto en el tiempo.</p>
+                    </article>
                 </div>
             </div>
         </section>
@@ -296,8 +351,8 @@
         <section id="projects" class="section">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title">Proyectos destacados</h2>
-                    <p class="section-subtitle">Soluciones de datos que generan valor</p>
+                    <h2 class="section-title">Casos de éxito</h2>
+                    <p class="section-subtitle">Problema → Solución → Resultado (con métricas)</p>
                 </div>
                 <div class="projects-grid">
                     <article class="project-card card">
@@ -305,11 +360,12 @@
                             <i class="fas fa-chart-line project-icon" aria-hidden="true"></i>
                         </div>
                         <div class="project-content">
-                            <h3 class="project-title">Dashboard Ejecutivo de Ventas</h3>
-                            <p class="project-description">
-                                Sistema de Business Intelligence que integra múltiples fuentes de datos
-                                para proporcionar insights en tiempo real sobre performance de ventas.
-                            </p>
+                            <h3 class="project-title">Ventas en tiempo real para dirección</h3>
+                            <div class="project-description">
+                                <p class="project-problem"><strong>Problema:</strong> decisiones lentas por reportes manuales y datos aislados.</p>
+                                <p class="project-solution"><strong>Solución:</strong> integré 3 fuentes en un modelo semántico y diseñé un dashboard ejecutivo con alertas.</p>
+                                <p class="project-result"><strong>Resultado:</strong> +15% velocidad en decisiones, reducción de preparación de reportes de horas a minutos.</p>
+                            </div>
                             <div class="project-metrics">
                                 <span class="metric">3 fuentes integradas</span>
                                 <span class="metric">Real-time updates</span>
@@ -334,11 +390,12 @@
                             <i class="fas fa-robot project-icon" aria-hidden="true"></i>
                         </div>
                         <div class="project-content">
-                            <h3 class="project-title">Sistema de Recomendaciones ML</h3>
-                            <p class="project-description">
-                                Motor de recomendaciones basado en machine learning que personaliza
-                                la experiencia del usuario y aumenta la conversión.
-                            </p>
+                            <h3 class="project-title">Recomendaciones con ML para up‑sell</h3>
+                            <div class="project-description">
+                                <p class="project-problem"><strong>Problema:</strong> baja conversión en cross/upsell sin personalización.</p>
+                                <p class="project-solution"><strong>Solución:</strong> modelo de recomendación con features transaccionales y reglas de negocio.</p>
+                                <p class="project-result"><strong>Resultado:</strong> aumento de conversión y ticket promedio (piloto controlado).</p>
+                            </div>
                             <div class="project-metrics">
                                 <span class="metric">94% precisión</span>
                                 <span class="metric">35% más conversiones</span>
@@ -384,6 +441,32 @@
                                     Código
                                 </a>
                             </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section section-alt" aria-labelledby="testimonials-title">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title" id="testimonials-title">Lo que dicen</h2>
+                    <p class="section-subtitle">Testimonios de stakeholders y líderes</p>
+                </div>
+                <div class="testimonials-grid">
+                    <article class="testimonial-card card">
+                        <p class="testimonial-quote">“Rubén lideró la plataforma de datos que hoy usamos a diario. Pasamos de reportes manuales a decisiones en tiempo real.”</p>
+                        <div class="testimonial-meta">
+                            <span class="author">Gerente Comercial</span>
+                            <span class="company">Sector Retail</span>
+                        </div>
+                    </article>
+                    <article class="testimonial-card card">
+                        <p class="testimonial-quote">“Traducía la estrategia del negocio a soluciones técnicas claras y medibles. Excelente para priorizar y ejecutar.”</p>
+                        <div class="testimonial-meta">
+                            <span class="author">Head of Analytics</span>
+                            <span class="company">Servicios Financieros</span>
                         </div>
                     </article>
                 </div>
@@ -599,7 +682,7 @@
                             <textarea id="message" name="message" class="form-textarea" rows="5" required aria-describedby="message-error"></textarea>
                             <span class="form-error" id="message-error" role="alert"></span>
                         </div>
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn primary">
                             <i class="fas fa-paper-plane" aria-hidden="true"></i>
                             Enviar mensaje
                         </button>

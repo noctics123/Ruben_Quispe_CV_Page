@@ -17,6 +17,7 @@ function initializePortfolio() {
     initializeSkillBars();
     initializeSmoothScroll();
     initializeAccessibility();
+    initializeAudienceToggle();
 }
 
 // =====================================================
@@ -33,6 +34,8 @@ function initializeNavigation() {
         navToggle.addEventListener('click', function() {
             const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
             navToggle.setAttribute('aria-expanded', !isExpanded);
+            // Align with CSS which uses .active (also keep legacy class for safety)
+            navMenu.classList.toggle('active');
             navMenu.classList.toggle('nav-links--open');
 
             // Prevent body scroll when menu is open
@@ -43,8 +46,9 @@ function initializeNavigation() {
     // Close mobile menu when clicking on links
     navLinks.forEach(link => {
         link.addEventListener('click', function() {
-            if (navMenu.classList.contains('nav-links--open')) {
+            if (navMenu.classList.contains('active') || navMenu.classList.contains('nav-links--open')) {
                 navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
                 navMenu.classList.remove('nav-links--open');
                 document.body.classList.remove('nav-open');
             }
@@ -53,8 +57,9 @@ function initializeNavigation() {
 
     // Close mobile menu when clicking outside
     document.addEventListener('click', function(event) {
-        if (!event.target.closest('.main-nav') && navMenu.classList.contains('nav-links--open')) {
+        if (!event.target.closest('.main-nav') && (navMenu.classList.contains('active') || navMenu.classList.contains('nav-links--open'))) {
             navToggle.setAttribute('aria-expanded', 'false');
+            navMenu.classList.remove('active');
             navMenu.classList.remove('nav-links--open');
             document.body.classList.remove('nav-open');
         }
@@ -91,6 +96,39 @@ function initializeActiveNavigation() {
     }, observerOptions);
 
     sections.forEach(section => observer.observe(section));
+}
+
+// =====================================================
+// AUDIENCE TOGGLE (Clientes / Reclutadores)
+// =====================================================
+
+function initializeAudienceToggle() {
+    const buttons = document.querySelectorAll('.audience-toggle .toggle-option');
+    if (!buttons.length) return;
+
+    // load preference
+    const saved = localStorage.getItem('preferredAudience');
+    const defaultAudience = saved === 'reclutadores' ? 'reclutadores' : 'clientes';
+    setAudience(defaultAudience);
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const audience = btn.getAttribute('data-audience');
+            setAudience(audience);
+        });
+    });
+
+    function setAudience(audience) {
+        document.body.setAttribute('data-audience', audience);
+        localStorage.setItem('preferredAudience', audience);
+
+        // update button states
+        buttons.forEach(b => {
+            const isActive = b.getAttribute('data-audience') === audience;
+            b.classList.toggle('active', isActive);
+            b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        });
+    }
 }
 
 // =====================================================
@@ -378,8 +416,9 @@ function initializeKeyboardNavigation() {
             const navToggle = document.querySelector('.nav-toggle');
             const navMenu = document.getElementById('nav-menu');
 
-            if (navMenu && navMenu.classList.contains('nav-links--open')) {
+            if (navMenu && (navMenu.classList.contains('active') || navMenu.classList.contains('nav-links--open'))) {
                 navToggle.setAttribute('aria-expanded', 'false');
+                navMenu.classList.remove('active');
                 navMenu.classList.remove('nav-links--open');
                 document.body.classList.remove('nav-open');
                 navToggle.focus();
